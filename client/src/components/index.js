@@ -17,8 +17,10 @@ import ProductStatsContainer from './ProductStatsContainer'
 import ChartContainer from './ChartContainer'
 import Loading from './Loading'
 import PaginationBtn from './PaginationBtn'
-import FilterForm from './FilterForm'
+import BigFilterForm from './BigFilterForm'
 import ProductContainerUser from './ProductContainerUser'
+import SmallFilterForm from './SmallFilterForm'
+
 export {
   NavbarComponent,
   NavLinksComponent,
@@ -39,6 +41,7 @@ export {
   ProductStatsContainer,
   Loading,
   PaginationBtn,
-  FilterForm,
+  BigFilterForm,
+  SmallFilterForm,
   ProductContainerUser,
 }

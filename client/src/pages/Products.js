@@ -1,11 +1,11 @@
-import { FilterForm, ProductContainerUser } from '../components'
+import { BigFilterForm, ProductContainerUser } from '../components'
 
 const Products = () => {
   return (
     <section className='container pt-5'>
       <div className='product-page'>
-          <FilterForm />
-          <ProductContainerUser />
+        <BigFilterForm />
+        <ProductContainerUser />
       </div>
     </section>
   )

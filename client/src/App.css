@@ -157,9 +157,6 @@ USER PAGE CSS
 }
 
 @media (max-width: 767px) {
-  .disable-filter-form {
-    display: none;
-  }
   .product-container-user {
     grid-column: 1 / span 4;
   }

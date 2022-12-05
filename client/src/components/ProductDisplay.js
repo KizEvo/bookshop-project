@@ -35,7 +35,9 @@ const ProductDisplay = () => {
         })}
       </div>
       {numberOfPages > 1 && <PaginationBtn />}
-      {numberOfPages === 0 && <h3 className='text-center'>No books match your search</h3>}
+      {numberOfPages === 0 && (
+        <h3 className='text-center'>No books match your search</h3>
+      )}
     </div>
   )
 }

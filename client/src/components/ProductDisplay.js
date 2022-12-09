@@ -9,7 +9,6 @@ const ProductDisplay = () => {
     isFetchingProduct,
     fetchProduct,
     products,
-    isProductUpdated,
     search,
     numberOfPages,
     page,
@@ -21,7 +20,7 @@ const ProductDisplay = () => {
     return () => {
       abortController.abort()
     }
-  }, [isProductUpdated, search, page])
+  }, [search, page])
 
   if (isFetchingProduct) {
     return <Loading pageLoading={isFetchingProduct} />

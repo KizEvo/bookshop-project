@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react'
 import { useAppContext } from '../context/appContext'
 import useDebounce from '../hooks/useDebounce'
 
+const maxPriceValue = 100
+
 const ScrollablePriceRange = () => {
   const { getSearchProductInput } = useAppContext()
-  const [priceValue, setPriceValue] = useState(50)
+  const [priceValue, setPriceValue] = useState(maxPriceValue)
 
   const debounceSearch = useDebounce(priceValue, 700)
 

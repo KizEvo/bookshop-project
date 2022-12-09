@@ -17,11 +17,6 @@ const SearchFormUser = () => {
     getSearchProductInput(query)
   }
 
-  useEffect(() => {
-    const query = { name: searchName.name }
-    getSearchProductInput(query)
-  }, [])
-
   return (
     <Form onSubmit={handleSubmit}>
       <div className='d-flex align-items-center'>

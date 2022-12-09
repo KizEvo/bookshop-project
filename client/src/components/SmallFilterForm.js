@@ -1,13 +1,27 @@
 import Offcanvas from 'react-bootstrap/Offcanvas'
-import ScrollablePriceRange from './ScrollablePriceRange'
+import Form from 'react-bootstrap/Form'
+import SmallFilterFormPriceInput from './SmallFilterFormPriceInput'
 import { BiFilterAlt } from 'react-icons/bi'
 import { useState } from 'react'
 
+const defaultFilterOptions = {
+  maxPrice: 0,
+}
+
 const SmallFilterForm = () => {
   const [show, setShow] = useState(false)
-
+  const [filterOptions, setFilterOptions] = useState(defaultFilterOptions)
   const handleClose = () => setShow(false)
   const toggleShow = () => setShow(true)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(filterOptions)
+  }
+
+  const handleMaxPriceChange = (e) => {
+    setFilterOptions({ ...filterOptions, [e.target.name]: e.target.value })
+  }
 
   return (
     <div className='d-md-none'>
@@ -20,7 +34,13 @@ const SmallFilterForm = () => {
           <Offcanvas.Title>Filter options</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <ScrollablePriceRange />
+          <Form onSubmit={handleSubmit}>
+            <SmallFilterFormPriceInput
+              maxPrice={filterOptions.maxPrice}
+              handleMaxPriceChange={handleMaxPriceChange}
+            />
+            <button>Click</button>
+          </Form>
         </Offcanvas.Body>
       </Offcanvas>
     </div>

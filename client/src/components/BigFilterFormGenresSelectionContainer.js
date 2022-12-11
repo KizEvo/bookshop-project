@@ -9,7 +9,16 @@ const genresOptions = [
 ]
 
 const BigFilterFormGenresSelectionContainer = (props) => {
-  const { searchByProductCategory } = props
+  const { setQueriesState, queriesState } = props
+
+  const searchbyProductCategory = (e) => {
+    if (e.target.checked) {
+      const categoryLabelId = e.target.id
+      const categoryName = categoryLabelId.split('_')[2]
+      setQueriesState({ ...queriesState, category: categoryName })
+    }
+  }
+
   return (
     <div className='d-flex align-items-start'>
       {genresOptions.map((item) => {
@@ -19,7 +28,7 @@ const BigFilterFormGenresSelectionContainer = (props) => {
             <input
               type='radio'
               name='genre'
-              onChange={searchByProductCategory}
+              onChange={searchbyProductCategory}
               id={`genre_label_${genre}`}
             ></input>
             <label htmlFor={`genre_label_${genre}`}>{genre}</label>

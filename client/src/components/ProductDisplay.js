@@ -28,7 +28,7 @@ const ProductDisplay = () => {
 
   return (
     <div className='mt-3'>
-      <div className='product-container product-container-display-user gap-4'>
+      <div className='product-container-display-user gap-4'>
         {products.map((product) => {
           return <ProductUser key={product._id} {...product} />
         })}

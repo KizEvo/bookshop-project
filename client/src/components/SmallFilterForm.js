@@ -2,6 +2,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas'
 import Form from 'react-bootstrap/Form'
 import SmallFilterFormPriceInput from './SmallFilterFormPriceInput'
 import { BiFilterAlt } from 'react-icons/bi'
+import { AiOutlineClose } from 'react-icons/ai'
 import { useState } from 'react'
 
 const defaultFilterOptions = {
@@ -11,8 +12,8 @@ const defaultFilterOptions = {
 const SmallFilterForm = () => {
   const [show, setShow] = useState(false)
   const [filterOptions, setFilterOptions] = useState(defaultFilterOptions)
-  const handleClose = () => setShow(false)
-  const toggleShow = () => setShow(true)
+  const handleCloseOffcanvas = () => setShow(false)
+  const toggleShowOffcanvas = () => setShow(true)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -25,13 +26,14 @@ const SmallFilterForm = () => {
 
   return (
     <div className='d-md-none'>
-      <div className='text-end m-2 fs-3 icon' onClick={toggleShow}>
+      <div className='text-end m-2 fs-3 icon' onClick={toggleShowOffcanvas}>
         <span className='fs-6 fw-bold'>Filter</span>
-        <BiFilterAlt variant='primary' />
+        <BiFilterAlt />
       </div>
-      <Offcanvas show={show} onHide={handleClose} scroll={true} backdrop={true}>
-        <Offcanvas.Header closeButton>
+      <Offcanvas show={show} onHide={handleCloseOffcanvas} responsive='md'>
+        <Offcanvas.Header>
           <Offcanvas.Title>Filter options</Offcanvas.Title>
+          <AiOutlineClose className='icon' onClick={handleCloseOffcanvas} />
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Form onSubmit={handleSubmit}>

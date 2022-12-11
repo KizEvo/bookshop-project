@@ -162,6 +162,19 @@ USER PAGE CSS
   }
 }
 
+@media (min-width: 376px) {
+  .product-container-display-user {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
+}
+
+.product-container-display-user {
+  display: grid;
+  justify-items: center;
+}
+
 /* 
 ====
 Get All Products Admin 
@@ -232,10 +245,6 @@ Get All Products Admin
   .product-container {
     display: grid;
     grid-template-columns: 1fr;
-  }
-
-  .product-container-display-user {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -432,7 +441,7 @@ Small Sidebar
 /* SMALL BREAKPOINT */
 @media (max-width: 576px) {
   body {
-    font-size: 1rem;
+    font-size: 0.85rem;
   }
 
   html {
@@ -466,3 +475,5 @@ Small Sidebar
     transform: rotate(1turn);
   }
 }
+
+/* XX SMALL BREAKPOINT */

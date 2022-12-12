@@ -1,27 +1,53 @@
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import Form from 'react-bootstrap/Form'
+import SmallFilterFormGenresSelectionContainer from './SmallFilterFormGenresSelectionContainer'
 import SmallFilterFormPriceInput from './SmallFilterFormPriceInput'
 import { BiFilterAlt } from 'react-icons/bi'
 import { AiOutlineClose } from 'react-icons/ai'
 import { useState } from 'react'
+import { useAppContext } from '../context/appContext'
 
-const defaultFilterOptions = {
-  maxPrice: 0,
+const defaultQueriesState = {
+  price: 0,
+  category: '',
 }
 
 const SmallFilterForm = () => {
-  const [show, setShow] = useState(false)
-  const [filterOptions, setFilterOptions] = useState(defaultFilterOptions)
-  const handleCloseOffcanvas = () => setShow(false)
-  const toggleShowOffcanvas = () => setShow(true)
+  const { getSearchProductInput, search, changePage } = useAppContext()
+
+  const [successMessage, setSuccessMessage] = useState(false)
+  
+  const [queriesState, setQueriesState] = useState(defaultQueriesState)
+  
+  const [showOffcanvas, setShowOffcanvas] = useState(false)
+  const handleCloseOffcanvas = () => setShowOffcanvas(false)
+  const toggleShowOffcanvas = () => setShowOffcanvas(true)
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(filterOptions)
+    const query = {
+      price: queriesState.price,
+      category: queriesState.category,
+      name: search.name,
+    }
+
+    const page = 1
+    changePage(page)
+    getSearchProductInput(query)
+    
+    displaySuccessMessage()
+    removeSuccessMessageAfterMillisSec(3000)
   }
 
-  const handleMaxPriceChange = (e) => {
-    setFilterOptions({ ...filterOptions, [e.target.name]: e.target.value })
+  const displaySuccessMessage = () => {
+    setSuccessMessage(true)
+  }
+
+  const removeSuccessMessageAfterMillisSec = (timeout) => {
+    setTimeout(() => {
+      setSuccessMessage(false)
+    }, timeout)
   }
 
   return (
@@ -30,7 +56,12 @@ const SmallFilterForm = () => {
         <span className='fs-6 fw-bold'>Filter</span>
         <BiFilterAlt />
       </div>
-      <Offcanvas show={show} onHide={handleCloseOffcanvas} responsive='md'>
+      <Offcanvas
+        show={showOffcanvas}
+        onHide={handleCloseOffcanvas}
+        responsive='md'
+        scroll={true}
+      >
         <Offcanvas.Header>
           <Offcanvas.Title>Filter options</Offcanvas.Title>
           <AiOutlineClose className='icon' onClick={handleCloseOffcanvas} />
@@ -38,10 +69,22 @@ const SmallFilterForm = () => {
         <Offcanvas.Body>
           <Form onSubmit={handleSubmit}>
             <SmallFilterFormPriceInput
-              maxPrice={filterOptions.maxPrice}
-              handleMaxPriceChange={handleMaxPriceChange}
+              queriesState={queriesState}
+              setQueriesState={setQueriesState}
             />
-            <button>Click</button>
+            <hr />
+            <SmallFilterFormGenresSelectionContainer
+              queriesState={queriesState}
+              setQueriesState={setQueriesState}
+            />
+            <div className='d-flex flex-column m-4'>
+              <button className='btn btn-primary'>Search</button>
+              {successMessage && (
+                <p className='fw-bold text-success align-self-center m-4'>
+                  Success!
+                </p>
+              )}
+            </div>
           </Form>
         </Offcanvas.Body>
       </Offcanvas>

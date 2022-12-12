@@ -1,11 +1,11 @@
 import FormRow from './FormRow'
 import Form from 'react-bootstrap/Form'
 import { useAppContext } from '../context/appContext'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 const SearchFormUser = () => {
   const [searchName, setSearchName] = useState({ name: '' })
-  const { getSearchProductInput } = useAppContext()
+  const { getSearchProductInput, search, changePage } = useAppContext()
 
   const handleChange = (e) => {
     setSearchName({ ...searchName, name: e.target.value })
@@ -13,7 +13,15 @@ const SearchFormUser = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const query = { name: searchName.name }
+    
+    const query = {
+      price: search.price || 50,
+      category: search.category || 'all',
+      name: searchName.name,
+    }
+
+    const page = 1
+    changePage(page)
     getSearchProductInput(query)
   }
 

@@ -345,7 +345,7 @@ const reducer = (state, action) => {
           author: action.payload.author || '',
           category: action.payload.category || 'all',
           sort: action.payload.sort || 'newest',
-          price: action.payload.price || 0,
+          price: action.payload.price || 1,
         },
       }
     case CHANGE_PAGE:

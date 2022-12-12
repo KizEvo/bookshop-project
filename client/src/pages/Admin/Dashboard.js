@@ -6,7 +6,7 @@ import {
 } from '../../components'
 import { useAppContext } from '../../context/appContext'
 const Dashboard = () => {
-  const { isLoading, showStats, monthlyUser, totalUser } = useAppContext()
+  const { isLoading, showStats } = useAppContext()
 
   useEffect(() => {
     const abortController = new AbortController()

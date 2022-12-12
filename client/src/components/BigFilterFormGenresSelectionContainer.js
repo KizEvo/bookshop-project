@@ -1,12 +1,4 @@
-const genresOptions = [
-  { id: 1, genre: 'adventure' },
-  { id: 2, genre: 'classic' },
-  { id: 3, genre: 'mystery' },
-  { id: 4, genre: 'fantasy' },
-  { id: 5, genre: 'historical' },
-  { id: 6, genre: 'horror' },
-  { id: 7, genre: 'sci-fi' },
-]
+import { genresOptions } from '../utils/genres'
 
 const BigFilterFormGenresSelectionContainer = (props) => {
   const { setQueriesState, queriesState } = props
@@ -24,7 +16,7 @@ const BigFilterFormGenresSelectionContainer = (props) => {
       {genresOptions.map((item) => {
         const { id, genre } = item
         return (
-          <div key={id} className='flex-row gap-2 my-1'>
+          <div key={id} className='flex-row gap-2 my-1 text-capitalize'>
             <input
               type='radio'
               name='genre'

@@ -35,7 +35,7 @@ a {
 
 hr {
   height: 1.5px;
-  width: 75%;
+  width: 100%;
   color: black;
   opacity: 0.75;
 }
@@ -159,6 +159,13 @@ USER PAGE CSS
 @media (max-width: 767px) {
   .product-container-user {
     grid-column: 1 / span 4;
+  }
+
+  .filter-form-genres-selection-small-width {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 1.2rem;
+    text-transform: capitalize;
   }
 }
 
@@ -390,6 +397,10 @@ Small Sidebar
     width: 90%;
   }
 
+  .product-container-display-user {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   /* BIG SIDEBAR */
 
   .big-sidebar {
@@ -441,7 +452,7 @@ Small Sidebar
 /* SMALL BREAKPOINT */
 @media (max-width: 576px) {
   body {
-    font-size: 0.85rem;
+    font-size: 1rem;
   }
 
   html {

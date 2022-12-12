@@ -1,7 +1,12 @@
 import Form from 'react-bootstrap/Form'
 
 const SmallFilterFormPriceInput = (props) => {
-  const { maxPrice, handleMaxPriceChange } = props
+  const { queriesState, setQueriesState } = props
+
+  const handlePriceChange = (e) => {
+    setQueriesState({ ...queriesState, price: e.target.value })
+  }
+  
   return (
     <div className='py-2'>
       <h6>Price range</h6>
@@ -17,12 +22,12 @@ const SmallFilterFormPriceInput = (props) => {
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>Min value</Form.Label>
+          <Form.Label>Max value</Form.Label>
           <Form.Control
             type='number'
-            name='maxPrice'
-            value={maxPrice}
-            onChange={handleMaxPriceChange}
+            name='price'
+            value={queriesState.price}
+            onChange={handlePriceChange}
             min='0'
           />
         </Form.Group>

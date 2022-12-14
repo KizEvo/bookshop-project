@@ -35,7 +35,6 @@ const SearchFormAdmin = () => {
       sort: values.sort,
       price: values.price,
     }
-    console.log(values.price)
     getSearchProductInput(query)
   }
 
@@ -119,7 +118,10 @@ const SearchFormAdmin = () => {
           </div>
         </div>
         <div className='d-flex flex-column m-2 mt-4'>
-          <button className='btn btn-primary align-self-center' disabled={isLoading}>
+          <button
+            className='btn btn-primary align-self-center'
+            disabled={isLoading}
+          >
             Search Product
           </button>
         </div>

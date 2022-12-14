@@ -10,11 +10,11 @@ const defaultQueriesState = {
 }
 
 const BigFilterForm = () => {
-  const { getSearchProductInput, user, search, changePage } = useAppContext()
+  const { getSearchProductInput, search, changePage } = useAppContext()
   const [queriesState, setQueriesState] = useState(defaultQueriesState)
   const refContainer = useRef(true)
 
-  const debounceSearch = useDebounce(queriesState.price, 700)
+  const debounceSearch = useDebounce(queriesState.price, 800)
 
   useEffect(() => {
     const isFirstRender = cancelTheFirstRender()
@@ -22,10 +22,10 @@ const BigFilterForm = () => {
 
     const query = {
       price: debounceSearch,
+      name: search.name,
       category: queriesState.category,
-      name: search.name || '',
     }
-    
+
     const page = 1
     changePage(page)
     getSearchProductInput(query)
@@ -57,8 +57,7 @@ const BigFilterForm = () => {
         </div>
         <div>
           <hr />
-          <h5 className='fw-bolder'>Welcome,</h5>
-          <h5>{user.name}</h5>
+          <h5>Welcome!</h5>
         </div>
       </div>
     </div>

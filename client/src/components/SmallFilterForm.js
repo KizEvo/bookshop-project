@@ -16,13 +16,12 @@ const SmallFilterForm = () => {
   const { getSearchProductInput, search, changePage } = useAppContext()
 
   const [successMessage, setSuccessMessage] = useState(false)
-  
+
   const [queriesState, setQueriesState] = useState(defaultQueriesState)
-  
+
   const [showOffcanvas, setShowOffcanvas] = useState(false)
   const handleCloseOffcanvas = () => setShowOffcanvas(false)
   const toggleShowOffcanvas = () => setShowOffcanvas(true)
-
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -35,7 +34,7 @@ const SmallFilterForm = () => {
     const page = 1
     changePage(page)
     getSearchProductInput(query)
-    
+
     displaySuccessMessage()
     removeSuccessMessageAfterMillisSec(3000)
   }
@@ -52,9 +51,12 @@ const SmallFilterForm = () => {
 
   return (
     <div className='d-md-none'>
-      <div className='text-end m-2 fs-3 icon' onClick={toggleShowOffcanvas}>
-        <span className='fs-6 fw-bold'>Filter</span>
+      <div
+        className='d-flex align-items-center text-end m-2 fs-3 icon'
+        onClick={toggleShowOffcanvas}
+      >
         <BiFilterAlt />
+        <span className='fs-6 fw-bold'>Filter</span>
       </div>
       <Offcanvas
         show={showOffcanvas}

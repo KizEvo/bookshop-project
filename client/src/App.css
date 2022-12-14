@@ -220,6 +220,10 @@ Get All Products Admin
   justify-items: center;
 }
 
+.total-products {
+  font-size: 0.85rem;
+}
+
 .card-img-top {
   margin: 1rem 0;
   width: 116px;

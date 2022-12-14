@@ -12,7 +12,7 @@ const BigFilterFormGenresSelectionContainer = (props) => {
   }
 
   return (
-    <div className='d-flex align-items-start'>
+    <div className='d-flex align-items-start pe-5 me-5'>
       {genresOptions.map((item) => {
         const { id, genre } = item
         return (
@@ -23,7 +23,9 @@ const BigFilterFormGenresSelectionContainer = (props) => {
               onChange={searchbyProductCategory}
               id={`genre_label_${genre}`}
             ></input>
-            <label htmlFor={`genre_label_${genre}`}>{genre}</label>
+            <label htmlFor={`genre_label_${genre}`} className='fs-6'>
+              {genre}
+            </label>
           </div>
         )
       })}

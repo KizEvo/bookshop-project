@@ -7,13 +7,16 @@ const ScrollablePriceRange = (props) => {
 
   return (
     <div>
-      <h5 className='fw-bolder'>Price range</h5>
-      <label htmlFor='product-user-range' className='form-range w-75 m-3'>
-        <div>0$ to {queriesState.price}$</div>
+      <h5 className='fw-bolder'>Price</h5>
+      <label
+        htmlFor='product-user-range'
+        className='form-range d-grid justify-content-start fs-5 text-bold'
+      >
+        <div>${queriesState.price}</div>
       </label>
       <input
         type='range'
-        className='form-range w-75'
+        className='form-range align-self-start'
         min='0'
         max='200'
         name='price'

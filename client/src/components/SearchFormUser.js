@@ -1,19 +1,18 @@
 import FormRow from './FormRow'
-import Form from 'react-bootstrap/Form'
 import useDebounce from '../hooks/useDebounce'
 import { useAppContext } from '../context/appContext'
 import { useEffect, useState, useRef } from 'react'
 
 const SearchFormUser = () => {
-  const [searchName, setSearchName] = useState({ name: '' })
-  const refContainer = useRef(true)
   const { getSearchProductInput, changePage, search } = useAppContext()
+  const [searchName, setSearchName] = useState(search.name)
+  const refContainer = useRef(true)
 
   const handleChange = (e) => {
-    setSearchName({ ...searchName, name: e.target.value })
+    setSearchName(e.target.value)
   }
 
-  const debounceSearch = useDebounce(searchName.name, 800)
+  const debounceSearch = useDebounce(searchName, 800)
 
   useEffect(() => {
     const isFirstRender = cancelTheFirstRender()
@@ -25,7 +24,6 @@ const SearchFormUser = () => {
       category: search.category,
     }
 
-    console.log(query)
     const page = 1
     changePage(page)
     getSearchProductInput(query)
@@ -46,7 +44,7 @@ const SearchFormUser = () => {
         <FormRow
           type='text'
           name='name'
-          value={searchName.name}
+          value={searchName}
           handleChange={handleChange}
           placeholder='Search here!'
         />

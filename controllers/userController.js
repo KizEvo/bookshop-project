@@ -37,6 +37,13 @@ const updateUser = async (req, res) => {
   }
   const user = await User.findOne({ _id: req.user.userId })
 
+  if (user.email !== email) {
+    const isEmailExist = await User.findOne({ email })
+    if (isEmailExist) {
+      throw new BadRequestError('This email already belongs to another user')
+    }
+  }
+
   if (!user) {
     throw new UnauthenticatedError('Invalid credentials')
   }

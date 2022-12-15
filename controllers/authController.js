@@ -1,10 +1,7 @@
 import User from '../models/User.js'
 import Token from '../models/Token.js'
 import { StatusCodes } from 'http-status-codes'
-import {
-  BadRequestError,
-  UnauthenticatedError,
-} from '../errors/index.js'
+import { BadRequestError, UnauthenticatedError } from '../errors/index.js'
 import {
   attachCookiesToResponse,
   createTokenUser,
@@ -18,6 +15,16 @@ const register = async (req, res) => {
 
   if (!name || !email || !password) {
     throw new BadRequestError('Please provide all values')
+  }
+
+  if (name.length <= 3) {
+    throw new BadRequestError(
+      'Please enter more than 3 characters for your name'
+    )
+  }
+
+  if (password.length <= 5) {
+    throw new BadRequestError('Your password is too short, please try again')
   }
 
   const isEmailExist = await User.findOne({ email })

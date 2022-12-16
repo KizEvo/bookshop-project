@@ -20,6 +20,7 @@ import PaginationBtn from './PaginationBtn'
 import BigFilterForm from './BigFilterForm'
 import ProductContainerUser from './ProductContainerUser'
 import SmallFilterForm from './SmallFilterForm'
+import Footer from './Footer'
 
 export {
   NavbarComponent,
@@ -44,4 +45,5 @@ export {
   BigFilterForm,
   SmallFilterForm,
   ProductContainerUser,
+  Footer,
 }

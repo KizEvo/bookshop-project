@@ -491,4 +491,16 @@ Small Sidebar
   }
 }
 
-/* XX SMALL BREAKPOINT */
+/* FOOTER SECTION */
+
+.footer-links a {
+  color: inherit;
+}
+
+.footer-icons svg {
+  margin: 0 0.5rem 0 0.5rem;
+}
+
+.footer-logo div img {
+  width: 3rem;
+}

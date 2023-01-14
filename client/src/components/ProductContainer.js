@@ -37,8 +37,8 @@ const ProductContainer = () => {
       <section className='container mt-4'>
         <h3>Number of products: {products.length}</h3>
         <div className='product-container mt-5'>
-          {products.map((product, index) => {
-            return <Product key={index} {...product} />
+          {products.map((product) => {
+            return <Product key={product._id} {...product} />
           })}
         </div>
         {numberOfPages > 1 && <PaginationBtn />}

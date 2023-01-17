@@ -44,6 +44,9 @@ import {
   SHOW_STATS_SUCCESS,
   GET_SEARCH_PRODUCT_INPUT,
   CHANGE_PAGE,
+  FETCH_SINGLE_PRODUCT_DETAIL_BEGIN,
+  FETCH_SINGLE_PRODUCT_DETAIL_SUCCESS,
+  FETCH_SINGLE_PRODUCT_DETAIL_ERROR,
 } from './action'
 
 const initialState = {
@@ -220,7 +223,26 @@ const AppProvider = ({ children }) => {
     dispatch({ type: GET_SEARCH_PRODUCT_INPUT, payload: query })
   }
 
-
+  const fetchSingleProduct = async (abortController, productId) => {
+    dispatch({ type: FETCH_SINGLE_PRODUCT_DETAIL_BEGIN })
+    try {
+      const { data } = await axios.get(`/api/v1/products/${productId}`, {
+        signal: abortController.signal,
+      })
+      const { product } = data
+      dispatch({
+        type: FETCH_SINGLE_PRODUCT_DETAIL_SUCCESS,
+        payload: product,
+      })
+    } catch (error) {
+      if (!abortController.signal.aborted) {
+        dispatch({
+          type: FETCH_SINGLE_PRODUCT_DETAIL_ERROR,
+          payload: { msg: error.response.data.msg },
+        })
+      }
+    }
+  }
 
   const fetchProduct = async (abortController) => {
     dispatch({ type: FETCH_PRODUCT_BEGIN })
@@ -361,6 +383,7 @@ const AppProvider = ({ children }) => {
         showStats,
         getSearchProductInput,
         changePage,
+        fetchSingleProduct,
       }}
     >
       {children}

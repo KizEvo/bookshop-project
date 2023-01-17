@@ -15,6 +15,7 @@ import VerifyResetPassword from './VerifyResetPassword'
 import SharedLayoutAdmin from './Admin/SharedLayoutAdmin'
 import GetAllProducts from './Admin/GetAllProducts'
 import CreateProduct from './Admin/CreateProduct'
+import SingleProductInfoPage from './SingleProductInfoPage'
 
 export {
   About,
@@ -34,4 +35,5 @@ export {
   SharedLayoutAdmin,
   GetAllProducts,
   CreateProduct,
+  SingleProductInfoPage,
 }

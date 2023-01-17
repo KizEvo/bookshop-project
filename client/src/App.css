@@ -132,6 +132,10 @@ USER PAGE CSS
   gap: 4rem;
 }
 
+.single-product-image-detail {
+  max-width: 18rem;
+}
+
 .product-container-user {
   grid-column: 2 / span 3;
 }
@@ -278,18 +282,17 @@ Dashboard Admin
 
 .edit-btn {
   cursor: pointer;
-  position: absolute;
-  left: 240px;
-  top: 10px;
   font-size: 2rem;
   color: #74c2c2;
 }
 
+.edit-btn:hover,
+.delete-btn:hover {
+  color: aliceblue;
+}
+
 .delete-btn {
   cursor: pointer;
-  position: absolute;
-  left: 240px;
-  top: 60px;
   font-size: 2rem;
   color: rgb(186, 122, 122);
 }
@@ -479,16 +482,6 @@ Small Sidebar
 
   .modal-content {
     margin: 0 2rem;
-  }
-
-  .edit-btn {
-    left: 205px;
-    top: 10px;
-  }
-
-  .delete-btn {
-    left: 205px;
-    top: 60px;
   }
 }
 

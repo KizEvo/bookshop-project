@@ -41,6 +41,9 @@ import {
   SHOW_STATS_SUCCESS,
   GET_SEARCH_PRODUCT_INPUT,
   CHANGE_PAGE,
+  FETCH_SINGLE_PRODUCT_DETAIL_BEGIN,
+  FETCH_SINGLE_PRODUCT_DETAIL_SUCCESS,
+  FETCH_SINGLE_PRODUCT_DETAIL_ERROR,
 } from './action'
 
 const reducer = (state, action) => {
@@ -352,6 +355,30 @@ const reducer = (state, action) => {
       return {
         ...state,
         page: action.payload,
+      }
+    case FETCH_SINGLE_PRODUCT_DETAIL_BEGIN:
+      return { ...state, isLoading: true }
+    case FETCH_SINGLE_PRODUCT_DETAIL_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        product: {
+          ...state.product,
+          name: action.payload.name,
+          price: action.payload.price,
+          author: action.payload.author,
+          description: action.payload.description,
+          image: action.payload.image,
+          category: action.payload.category,
+        },
+      }
+    case FETCH_SINGLE_PRODUCT_DETAIL_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: 'danger',
+        alertText: action.payload.msg,
       }
     default:
       return state

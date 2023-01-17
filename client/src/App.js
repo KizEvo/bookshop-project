@@ -17,6 +17,7 @@ import {
   SharedLayoutAdmin,
   GetAllProducts,
   CreateProduct,
+  SingleProductInfoPage,
 } from './pages'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useAppContext } from './context/appContext'
@@ -36,6 +37,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path='about' element={<About />} />
           <Route path='products' element={<Products />} />
+          <Route path='products/:id' element={<SingleProductInfoPage />} />
           <Route path='cart' element={<Cart />} />
           <Route path='register' element={<Register />} />
           <Route path='forgot-password' element={<ForgotPassword />} />

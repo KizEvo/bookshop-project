@@ -18,7 +18,7 @@ const SingleProductInfoPage = () => {
   }, [])
 
   return (
-    <section className='full-screen'>
+    <section className=''>
       <SingleProductDetail />
     </section>
   )

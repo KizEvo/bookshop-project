@@ -233,11 +233,15 @@ Get All Products Admin
 
 .card-img-top {
   margin: 0;
-  /* width: 116px;
-  height: 150px; */
   max-width: 100%;
   max-height: 14rem;
   align-self: center;
+}
+
+.product-img-detail {
+  margin: 0;
+  max-width: 75%;
+  max-height: 29.75rem;
 }
 
 .card-text-info {

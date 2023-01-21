@@ -21,6 +21,9 @@ import BigFilterForm from './BigFilterForm'
 import ProductContainerUser from './ProductContainerUser'
 import SmallFilterForm from './SmallFilterForm'
 import Footer from './Footer'
+import SingleProductDetail from './SingleProductDetail'
+import CartCard from './CartCard'
+import CartCardContainer from './CartCardContainer'
 
 export {
   NavbarComponent,
@@ -46,4 +49,7 @@ export {
   SmallFilterForm,
   ProductContainerUser,
   Footer,
+  SingleProductDetail,
+  CartCard,
+  CartCardContainer,
 }

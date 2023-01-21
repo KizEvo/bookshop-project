@@ -1,10 +1,13 @@
 import { useState } from 'react'
+import { useAppContext } from '../context/appContext'
+import { Link } from 'react-router-dom'
 
 const AddProductInSingleProductPageDetail = () => {
+  const { addProductToCartInItsDetailPage } = useAppContext()
   const [numberOfItem, setNumberOfItem] = useState(1)
 
   const buttonHandler = () => {
-    console.log(numberOfItem)
+    addProductToCartInItsDetailPage(numberOfItem)
   }
 
   return (
@@ -14,15 +17,17 @@ const AddProductInSingleProductPageDetail = () => {
         type='number'
         value={numberOfItem}
         min='1'
+        max='15'
         style={{ maxWidth: '5rem' }}
         onChange={(e) => setNumberOfItem(e.target.value)}
       />
-      <button
-        className='btn btn-outline-dark flex-shrink-0'
+      <Link
+        to='../../cart'
+        className='btn btn-primary flex-shrink-0'
         onClick={buttonHandler}
       >
         Add to cart
-      </button>
+      </Link>
     </div>
   )
 }

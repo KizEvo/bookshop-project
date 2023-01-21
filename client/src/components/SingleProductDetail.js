@@ -9,7 +9,11 @@ const SingleProductDetail = () => {
       <div className='container px-4 px-lg-5'>
         <div className='row gx-4 gx-lg-5 align-items-center'>
           <div className='col-md-6'>
-            <img className='product-img-detail' src={product.image} alt='...' />
+            <img
+              className='product-img-detail'
+              src={product.image}
+              alt={product.name}
+            />
           </div>
           <div className='col-md-6'>
             <h1 className='display-5 fw-bolder mt-3 mt-md-0'>{product.name}</h1>

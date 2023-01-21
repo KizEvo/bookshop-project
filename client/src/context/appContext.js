@@ -47,6 +47,8 @@ import {
   FETCH_SINGLE_PRODUCT_DETAIL_BEGIN,
   FETCH_SINGLE_PRODUCT_DETAIL_SUCCESS,
   FETCH_SINGLE_PRODUCT_DETAIL_ERROR,
+  ADD_INFO_OF_PRODUCTS_TO_CART,
+  GET_TOTAL_PRICE_OF_PRODUCTS_IN_CART,
 } from './action'
 
 const initialState = {
@@ -66,6 +68,8 @@ const initialState = {
   numberOfPages: 1,
   page: 1,
   monthlyUser: [],
+  totalPriceOfProductsInCart: 0,
+  productsInCart: [],
   productStats: {},
   productId: '',
   products: [],
@@ -302,6 +306,25 @@ const AppProvider = ({ children }) => {
     clearAlert()
   }
 
+  const addProductToCartInItsDetailPage = async (amount) => {
+    dispatch({
+      type: ADD_INFO_OF_PRODUCTS_TO_CART,
+      payload: amount,
+    })
+    dispatch({
+      type: GET_TOTAL_PRICE_OF_PRODUCTS_IN_CART,
+    })
+  }
+
+  const addProductToCartWithoutGoingIntoItsDetailPage = () => {
+    dispatch({
+      type: 'ADD_INFO_OF_PRODUCTS_TO_CART_WITHOUT_GOING_INTO_ITS_DETAIL_PAGE',
+    })
+    dispatch({
+      type: GET_TOTAL_PRICE_OF_PRODUCTS_IN_CART,
+    })
+  }
+
   const showStats = async (abortController) => {
     dispatch({ type: SHOW_STATS_BEGIN })
     try {
@@ -384,6 +407,8 @@ const AppProvider = ({ children }) => {
         getSearchProductInput,
         changePage,
         fetchSingleProduct,
+        addProductToCartInItsDetailPage,
+        addProductToCartWithoutGoingIntoItsDetailPage,
       }}
     >
       {children}

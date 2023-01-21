@@ -44,6 +44,8 @@ import {
   FETCH_SINGLE_PRODUCT_DETAIL_BEGIN,
   FETCH_SINGLE_PRODUCT_DETAIL_SUCCESS,
   FETCH_SINGLE_PRODUCT_DETAIL_ERROR,
+  ADD_INFO_OF_PRODUCTS_TO_CART,
+  GET_TOTAL_PRICE_OF_PRODUCTS_IN_CART,
 } from './action'
 
 const reducer = (state, action) => {
@@ -379,6 +381,50 @@ const reducer = (state, action) => {
         showAlert: true,
         alertType: 'danger',
         alertText: action.payload.msg,
+      }
+    case ADD_INFO_OF_PRODUCTS_TO_CART:
+      const productAddedThroughItsDetailPage = {
+        id: state.productId,
+        name: state.product.name,
+        quantity: action.payload,
+        price: state.product.price,
+        image: state.product.image,
+      }
+      return {
+        ...state,
+        productsInCart: [
+          ...state.productsInCart,
+          productAddedThroughItsDetailPage,
+        ],
+      }
+    case GET_TOTAL_PRICE_OF_PRODUCTS_IN_CART:
+      let totalPrice = 0
+      for (let i = 0; i < state.productsInCart.length; i++) {
+        totalPrice =
+          totalPrice +
+          state.productsInCart[i].price * state.productsInCart[i].quantity
+      }
+      return {
+        ...state,
+        totalPriceOfProductsInCart: totalPrice,
+      }
+    case 'ADD_INFO_OF_PRODUCTS_TO_CART_WITHOUT_GOING_INTO_ITS_DETAIL_PAGE':
+      const matchedProduct = state.products.filter(
+        (product) => product._id === state.productId
+      )
+      const productAddedThroughAddToCartButton = {
+        id: state.productId,
+        name: matchedProduct[0].name,
+        quantity: 1,
+        price: matchedProduct[0].price,
+        image: matchedProduct[0].image,
+      }
+      return {
+        ...state,
+        productsInCart: [
+          ...state.productsInCart,
+          productAddedThroughAddToCartButton,
+        ],
       }
     default:
       return state

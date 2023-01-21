@@ -2,10 +2,16 @@ import { useAppContext } from '../context/appContext'
 import { Link } from 'react-router-dom'
 
 const ProductUser = ({ _id, name, price, author, image }) => {
-  const { setProductId, productId } = useAppContext()
+  const { setProductId, addProductToCartWithoutGoingIntoItsDetailPage } =
+    useAppContext()
 
-  const clickHandler = () => {
+  const imgClickHandler = () => {
     setProductId(_id)
+  }
+
+  const addToCartClickHandler = () => {
+    setProductId(_id)
+    addProductToCartWithoutGoingIntoItsDetailPage()
   }
 
   return (
@@ -14,20 +20,26 @@ const ProductUser = ({ _id, name, price, author, image }) => {
         className='d-flex flex-column justify-content-between border border-1 rounded-2'
         style={{ width: '12rem' }}
       >
-        <Link to={`${productId}`}>
+        <Link to={`${_id}`}>
           <img
             src={image}
             className='card-img-top hover-cursor-pointer rounded-top'
             alt={`${name}`}
-            onClick={clickHandler}
+            onClick={imgClickHandler}
           />
         </Link>
-        <div className='m-2 mt-auto' onClick={clickHandler}>
+        <div className='m-2 mt-auto'>
           <p className='card-text-info fw-bold mt-2'>{name}</p>
           <p className='card-text-info'>Author: {author}</p>
           <p className='fw-bold fs-6 p-0 mb-0 mt-2'>{price}$</p>
         </div>
-        <button className='btn btn-primary'>Add to cart</button>
+        <Link
+          to='../cart'
+          className='btn btn-primary'
+          onClick={addToCartClickHandler}
+        >
+          Add to cart
+        </Link>
       </div>
     </>
   )

@@ -49,6 +49,7 @@ import {
   FETCH_SINGLE_PRODUCT_DETAIL_ERROR,
   ADD_INFO_OF_PRODUCTS_TO_CART,
   GET_TOTAL_PRICE_OF_PRODUCTS_IN_CART,
+  ADD_INFO_OF_PRODUCTS_TO_CART_WITHOUT_GOING_INTO_ITS_DETAIL_PAGE,
 } from './action'
 
 const initialState = {
@@ -318,7 +319,7 @@ const AppProvider = ({ children }) => {
 
   const addProductToCartWithoutGoingIntoItsDetailPage = () => {
     dispatch({
-      type: 'ADD_INFO_OF_PRODUCTS_TO_CART_WITHOUT_GOING_INTO_ITS_DETAIL_PAGE',
+      type: ADD_INFO_OF_PRODUCTS_TO_CART_WITHOUT_GOING_INTO_ITS_DETAIL_PAGE,
     })
     dispatch({
       type: GET_TOTAL_PRICE_OF_PRODUCTS_IN_CART,

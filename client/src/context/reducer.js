@@ -46,6 +46,7 @@ import {
   FETCH_SINGLE_PRODUCT_DETAIL_ERROR,
   ADD_INFO_OF_PRODUCTS_TO_CART,
   GET_TOTAL_PRICE_OF_PRODUCTS_IN_CART,
+  ADD_INFO_OF_PRODUCTS_TO_CART_WITHOUT_GOING_INTO_ITS_DETAIL_PAGE,
 } from './action'
 
 const reducer = (state, action) => {
@@ -383,6 +384,24 @@ const reducer = (state, action) => {
         alertText: action.payload.msg,
       }
     case ADD_INFO_OF_PRODUCTS_TO_CART:
+      const productAlreadyExistInCart = state.productsInCart.find(
+        (product) => product.id === state.productId
+      )
+
+      if (productAlreadyExistInCart) {
+        return {
+          ...state,
+          productsInCart: state.productsInCart.map((product) => {
+            return product.id === state.productId
+              ? {
+                  ...product,
+                  quantity: product.quantity + parseInt(action.payload),
+                }
+              : { ...product }
+          }),
+        }
+      }
+
       const productAddedThroughItsDetailPage = {
         id: state.productId,
         name: state.product.name,
@@ -408,10 +427,29 @@ const reducer = (state, action) => {
         ...state,
         totalPriceOfProductsInCart: totalPrice,
       }
-    case 'ADD_INFO_OF_PRODUCTS_TO_CART_WITHOUT_GOING_INTO_ITS_DETAIL_PAGE':
+    case ADD_INFO_OF_PRODUCTS_TO_CART_WITHOUT_GOING_INTO_ITS_DETAIL_PAGE:
       const matchedProduct = state.products.filter(
         (product) => product._id === state.productId
       )
+
+      const productAlreadyInCart = state.productsInCart.find(
+        (product) => product.id === state.productId
+      )
+
+      if (productAlreadyInCart) {
+        return {
+          ...state,
+          productsInCart: state.productsInCart.map((product) => {
+            return product.id === state.productId
+              ? {
+                  ...product,
+                  quantity: product.quantity + 1,
+                }
+              : { ...product }
+          }),
+        }
+      }
+
       const productAddedThroughAddToCartButton = {
         id: state.productId,
         name: matchedProduct[0].name,

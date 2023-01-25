@@ -464,6 +464,11 @@ const reducer = (state, action) => {
           productAddedThroughAddToCartButton,
         ],
       }
+    case 'DELETE_PRODUCT_CART':
+      const newCart = state.productsInCart.filter(
+        (product) => product.id !== action.payload
+      )
+      return { ...state, productsInCart: newCart }
     default:
       return state
   }

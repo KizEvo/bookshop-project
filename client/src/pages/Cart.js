@@ -6,7 +6,7 @@ const Cart = () => {
   const { productsInCart, totalPriceOfProductsInCart } = useAppContext()
 
   const checkCartLengthWhenThereAreProducts = () => {
-    if (productsInCart.length > 2) return 'd-flex flex-column'
+    if (productsInCart.length > 1) return 'd-flex flex-column'
     return 'd-flex flex-column vh-100 justify-content-center'
   }
 
@@ -31,7 +31,11 @@ const Cart = () => {
             <Link to='../products' className='btn btn-light btn-lg me-2'>
               Continue shopping
             </Link>
-            <button type='button' disabled className='btn btn-primary btn-lg'>
+            <button
+              type='button'
+              disabled
+              className='btn btn-primary btn-lg d-flex align-items-center'
+            >
               Checkout
             </button>
           </div>
@@ -67,12 +71,15 @@ const Cart = () => {
         </div>
 
         <div className='d-flex justify-content-end mb-5'>
-          <Link to='../products' className='btn btn-light btn-lg me-2'>
+          <Link to='/products' className='btn btn-light btn-lg me-2'>
             Continue shopping
           </Link>
-          <button type='button' className='btn btn-primary btn-lg'>
+          <Link
+            to='checkout'
+            className='btn btn-primary btn-lg d-flex align-items-center'
+          >
             Checkout
-          </button>
+          </Link>
         </div>
       </div>
     </section>

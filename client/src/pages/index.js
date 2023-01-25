@@ -16,6 +16,7 @@ import SharedLayoutAdmin from './Admin/SharedLayoutAdmin'
 import GetAllProducts from './Admin/GetAllProducts'
 import CreateProduct from './Admin/CreateProduct'
 import SingleProductInfoPage from './SingleProductInfoPage'
+import Checkout from './Checkout'
 
 export {
   About,
@@ -36,4 +37,5 @@ export {
   GetAllProducts,
   CreateProduct,
   SingleProductInfoPage,
+  Checkout,
 }

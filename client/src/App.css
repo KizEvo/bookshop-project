@@ -163,6 +163,13 @@ USER PAGE CSS
   justify-content: center;
 }
 
+.cart-card-delete-icon {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  width: 2rem;
+}
+
 @media (max-width: 767px) {
   .product-container-user {
     grid-column: 1 / span 4;

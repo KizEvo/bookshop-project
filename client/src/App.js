@@ -18,6 +18,7 @@ import {
   GetAllProducts,
   CreateProduct,
   SingleProductInfoPage,
+  Checkout,
 } from './pages'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useAppContext } from './context/appContext'
@@ -63,6 +64,14 @@ function App() {
             element={
               <ProtectedRoute protectRoute='verify-email'>
                 <VerifyEmail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='cart/checkout'
+            element={
+              <ProtectedRoute protectRoute='checkout'>
+                <Checkout />
               </ProtectedRoute>
             }
           />

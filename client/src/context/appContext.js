@@ -326,6 +326,10 @@ const AppProvider = ({ children }) => {
     })
   }
 
+  const deleteProductInCart = (productId) => {
+    dispatch({ type: 'DELETE_PRODUCT_CART', payload: productId })
+  }
+
   const showStats = async (abortController) => {
     dispatch({ type: SHOW_STATS_BEGIN })
     try {
@@ -410,6 +414,7 @@ const AppProvider = ({ children }) => {
         fetchSingleProduct,
         addProductToCartInItsDetailPage,
         addProductToCartWithoutGoingIntoItsDetailPage,
+        deleteProductInCart,
       }}
     >
       {children}

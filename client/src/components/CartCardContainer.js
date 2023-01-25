@@ -1,3 +1,4 @@
+import React from 'react'
 import { useAppContext } from '../context/appContext'
 import CartCard from './CartCard'
 
@@ -8,7 +9,7 @@ const CartCardContainer = () => {
     <>
       {productsInCart.map((product) => {
         return (
-          <div key={product.id}>
+          <React.Fragment key={product.id}>
             <CartCard
               id={product.id}
               name={product.name}
@@ -16,7 +17,7 @@ const CartCardContainer = () => {
               price={product.price}
               image={product.image}
             />
-          </div>
+          </React.Fragment>
         )
       })}
     </>

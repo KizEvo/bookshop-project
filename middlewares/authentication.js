@@ -21,6 +21,7 @@ const authenticationUser = async (req, res, next) => {
       refreshToken: payload.refreshToken,
     })
 
+    // ?. optional chaining
     if (!existingToken || !existingToken?.isValid) {
       throw new UnauthenticatedError('Authentication Invalid')
     }

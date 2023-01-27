@@ -31,6 +31,12 @@ const OrderSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    status: {
+      type: String,
+      enum: ['arrived', 'delivering'],
+      default: 'delivering',
+      required: true,
+    },
     user: {
       type: mongoose.Types.ObjectId,
       ref: 'User',

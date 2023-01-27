@@ -2,6 +2,7 @@ import { StatusCodes } from 'http-status-codes'
 import { BadRequestError, NotFoundError } from '../errors/index.js'
 import Order from '../models/Order.js'
 import Product from '../models/Product.js'
+import checkPermissions from '../utils/checkPermissions.js'
 
 const fakeStripeAPI = (amount, currency) => {
   const client_secret = 'randomSecret'
@@ -51,9 +52,25 @@ const createOrder = async (req, res) => {
     .json({ order, clientSecret: order.clientSecret })
 }
 
+const getAUserOrders = async (req, res) => {
+  const orders = await Order.find({ user: req.user.userId })
+
+  if (!orders) {
+    throw new NotFoundError('No matching order tied to this user')
+  }
+
+  for (let i = 0; i < orders.length; i++) {
+    if (orders[0].user.toString() !== orders[i].user.toString())
+      throw new NotFoundError('No matching order tied to this user')
+  }
+
+  checkPermissions(req.user, orders[0].user)
+  res.send({ orders })
+}
+
 const getAllOrders = async (req, res) => {
   const orders = await Order.find({})
   res.status(StatusCodes.OK).json({ orders })
 }
 
-export { createOrder, getAllOrders }
+export { createOrder, getAllOrders, getAUserOrders }

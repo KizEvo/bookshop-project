@@ -1,6 +1,6 @@
 import { useAppContext } from '../context/appContext'
 import { useState } from 'react'
-import { UpdateUser, Order } from '../components'
+import { UpdateUser, OrderList } from '../components'
 
 const User = () => {
   const [loading, setLoading] = useState(false)
@@ -54,7 +54,7 @@ const User = () => {
           </div>
           <div className='form-bigger form-background flex-fill'>
             {address && <UpdateUser />}
-            {orders && <Order />}
+            {orders && <OrderList />}
           </div>
         </div>
       </div>

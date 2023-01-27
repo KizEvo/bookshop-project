@@ -3,8 +3,6 @@ import Form from 'react-bootstrap/Form'
 import { Alert, FormRow, Product } from '../../components'
 import { useAppContext } from '../../context/appContext'
 
-const cursorPointerStyle = { cursor: 'pointer' }
-
 const CreateProduct = () => {
   const {
     showAlert,
@@ -94,7 +92,7 @@ const CreateProduct = () => {
                 type='file'
                 accept='.png,.jpg'
                 onChange={(e) => setFileImage(e.target.files[0])}
-                style={cursorPointerStyle}
+                className='hover-cursor-pointer'
               />
             </label>
             <FormRow

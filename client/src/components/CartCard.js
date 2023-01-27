@@ -56,7 +56,7 @@ const CartCard = (props) => {
 
           <div className='col-md-2' style={{ width: 'fit-content' }}>
             <div
-              className='p-2 cart-card-delete-icon'
+              className='p-2 cart-card-delete-icon hover-cursor-pointer'
               onClick={deleteProductHandler}
             >
               <GrClose />

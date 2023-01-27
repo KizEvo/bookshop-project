@@ -50,6 +50,10 @@ import {
   ADD_INFO_OF_PRODUCTS_TO_CART,
   GET_TOTAL_PRICE_OF_PRODUCTS_IN_CART,
   ADD_INFO_OF_PRODUCTS_TO_CART_WITHOUT_GOING_INTO_ITS_DETAIL_PAGE,
+  DELETE_PRODUCT_IN_CART,
+  CREATE_ORDER_BEGIN,
+  CREATE_ORDER_SUCCESS,
+  CREATE_ORDER_ERROR,
 } from './action'
 
 const initialState = {
@@ -98,6 +102,7 @@ const initialState = {
     category: 'all',
     price: 0,
   },
+  orders: [],
 }
 
 const AppContext = React.createContext()
@@ -327,7 +332,7 @@ const AppProvider = ({ children }) => {
   }
 
   const deleteProductInCart = (productId) => {
-    dispatch({ type: 'DELETE_PRODUCT_CART', payload: productId })
+    dispatch({ type: DELETE_PRODUCT_IN_CART, payload: productId })
   }
 
   const showStats = async (abortController) => {
@@ -346,9 +351,22 @@ const AppProvider = ({ children }) => {
       })
     } catch (error) {
       if (!abortController.signal.aborted) {
-        console.log(error.response)
+        console.log(error.response.data)
       }
     }
+  }
+
+  const createOrder = async () => {
+    dispatch({ type: CREATE_ORDER_BEGIN })
+    try {
+      await axios.post('/api/v1/order', {
+        productsInCart: state.productsInCart,
+      })
+      dispatch({ type: CREATE_ORDER_SUCCESS })
+    } catch (error) {
+      dispatch({ type: CREATE_ORDER_ERROR, payload: error.response.data })
+    }
+    clearAlert()
   }
 
   const showEditModal = () => {
@@ -415,6 +433,7 @@ const AppProvider = ({ children }) => {
         addProductToCartInItsDetailPage,
         addProductToCartWithoutGoingIntoItsDetailPage,
         deleteProductInCart,
+        createOrder,
       }}
     >
       {children}

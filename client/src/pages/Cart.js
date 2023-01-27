@@ -7,7 +7,7 @@ const Cart = () => {
 
   const checkCartLengthWhenThereAreProducts = () => {
     if (productsInCart.length > 1) return 'd-flex flex-column'
-    return 'd-flex flex-column vh-100 justify-content-center'
+    return 'd-flex flex-column h-75 justify-content-center'
   }
 
   if (productsInCart.length === 0) {
@@ -18,10 +18,10 @@ const Cart = () => {
           <div className='h3'>Your cart is empty!</div>
           <div className='card mb-5'>
             <div className='card-body p-4'>
-              <div className='float-end'>
-                <p className='mb-0 me-5 d-flex align-items-center'>
-                  <span className='small text-muted me-2'>Order total:</span>{' '}
-                  <span className='lead fw-normal'>$0</span>
+              <div>
+                <p className='mb-0 me-5 d-flex justify-content-between align-items-center'>
+                  <span className='me-2 h4'>Order total</span>{' '}
+                  <span className='h4 mb-1'>${totalPriceOfProductsInCart}</span>
                 </p>
               </div>
             </div>
@@ -57,14 +57,12 @@ const Cart = () => {
         <CartCardContainer />
 
         {/* total price */}
-        <div className='card mb-5'>
+        <div className='card mb-5 align-self-end' style={{ width: '25rem' }}>
           <div className='card-body p-4'>
-            <div className='float-end'>
-              <p className='mb-0 me-5 d-flex align-items-center'>
-                <span className='small text-muted me-2'>Order total:</span>{' '}
-                <span className='lead fw-normal'>
-                  ${totalPriceOfProductsInCart}
-                </span>
+            <div>
+              <p className='mb-0 me-3 d-flex justify-content-between align-items-center'>
+                <span className='me-2 h4'>Order total</span>{' '}
+                <span className='h4 mb-1'>${totalPriceOfProductsInCart}</span>
               </p>
             </div>
           </div>

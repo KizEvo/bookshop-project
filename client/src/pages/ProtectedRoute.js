@@ -4,10 +4,18 @@ import useQuery from '../utils/query'
 
 const ProtectedRoute = ({ children, protectRoute }) => {
   const query = useQuery()
-  const { user } = useAppContext()
+  const { user, productsInCart } = useAppContext()
 
-  if ((!user || user.role === 'admin') && protectRoute === 'checkout')
-    return <Navigate to='/register' />
+  if (user?.role) {
+    const isProtectedRouteResetVerifyPassword =
+      protectRoute === 'reset-password' || protectRoute === 'verify-email'
+    if (isProtectedRouteResetVerifyPassword) return <Navigate to='/' />
+  }
+
+  if (!user && protectRoute === 'checkout') return <Navigate to='/register' />
+
+  if (user && protectRoute === 'checkout' && productsInCart.length === 0)
+    return <Navigate to='/products' />
 
   if (protectRoute && !user) {
     const token = query.get('token')

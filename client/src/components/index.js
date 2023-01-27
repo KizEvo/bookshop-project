@@ -5,7 +5,7 @@ import Logo from './Logo'
 import FormRow from './FormRow'
 import Alert from './Alert'
 import UpdateUser from './UpdateUser'
-import Order from './Order'
+import OrderList from './OrderList'
 import BigSidebar from './BigSidebar'
 import SmallSidebar from './SmallSidebar'
 import AdminNavbarComponent from './AdminNavbarComponent'
@@ -24,6 +24,7 @@ import Footer from './Footer'
 import SingleProductDetail from './SingleProductDetail'
 import CartCard from './CartCard'
 import CartCardContainer from './CartCardContainer'
+import CreditCardForm from './CreditCardForm'
 
 export {
   NavbarComponent,
@@ -33,7 +34,6 @@ export {
   FormRow,
   Alert,
   UpdateUser,
-  Order,
   BigSidebar,
   SmallSidebar,
   AdminNavbarComponent,
@@ -52,4 +52,6 @@ export {
   SingleProductDetail,
   CartCard,
   CartCardContainer,
+  CreditCardForm,
+  OrderList,
 }

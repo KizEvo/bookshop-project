@@ -78,6 +78,25 @@ STYLES
   padding: 1rem;
 }
 
+#credit-card-expire-date {
+  width: 11rem;
+}
+
+@media (min-width: 576px) {
+  #credit-card-card-number {
+    width: 23rem;
+  }
+}
+
+.checkout-background-img {
+  background-image: url(./assets/checkout-background-page-image.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  height: 15rem;
+}
+
 .register-login-change-button {
   background-color: inherit;
   border: none;

@@ -8,7 +8,7 @@ import logo from '../assets/book-logo.png'
 
 const Footer = () => {
   return (
-    <footer className='mt-3 p-4 bg-success bg-opacity-25'>
+    <footer className='mt-3 p-4 pb-5 bg-success bg-opacity-25'>
       <div className='d-md-flex container gap-5'>
         <div className='w-75'>
           <div className='footer-logo'>
@@ -30,7 +30,7 @@ const Footer = () => {
             <FaTwitch />
           </div>
         </div>
-        <div className='d-md-flex justify-content-between vw-100 gap-5'>
+        <div className='d-md-flex justify-content-between w-100 gap-5'>
           <div>
             <h5 className='mt-2 mb-4 '>Product</h5>
             <div className='d-flex flex-column footer-links'>
@@ -60,7 +60,7 @@ const Footer = () => {
         </div>
       </div>
       <div className='text-center'>
-        <h6 className='m-0 p-2'>All rights reserved by @Bookshop 2022</h6>
+        <h6 className='m-0 pt-3 pb-1'>All rights reserved by @Bookshop 2022</h6>
       </div>
     </footer>
   )

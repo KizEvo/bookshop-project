@@ -47,6 +47,10 @@ import {
   ADD_INFO_OF_PRODUCTS_TO_CART,
   GET_TOTAL_PRICE_OF_PRODUCTS_IN_CART,
   ADD_INFO_OF_PRODUCTS_TO_CART_WITHOUT_GOING_INTO_ITS_DETAIL_PAGE,
+  DELETE_PRODUCT_IN_CART,
+  CREATE_ORDER_BEGIN,
+  CREATE_ORDER_SUCCESS,
+  CREATE_ORDER_ERROR,
 } from './action'
 
 const reducer = (state, action) => {
@@ -62,6 +66,8 @@ const reducer = (state, action) => {
       return {
         ...state,
         showAlert: false,
+        alertText: '',
+        alertType: '',
       }
     case REGISTER_USER_BEGIN:
       return { ...state, isLoading: true }
@@ -464,11 +470,38 @@ const reducer = (state, action) => {
           productAddedThroughAddToCartButton,
         ],
       }
-    case 'DELETE_PRODUCT_CART':
+    case DELETE_PRODUCT_IN_CART:
       const newCart = state.productsInCart.filter(
         (product) => product.id !== action.payload
       )
-      return { ...state, productsInCart: newCart }
+      let total = 0
+      for (let i = 0; i < newCart.length; i++) {
+        total = total + newCart[i].price * newCart[i].quantity
+      }
+
+      return {
+        ...state,
+        productsInCart: newCart,
+        totalPriceOfProductsInCart: total,
+      }
+    case CREATE_ORDER_BEGIN:
+      return { ...state, isLoading: true }
+    case CREATE_ORDER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: 'success',
+        alertText: 'Payment completed, thanks you for your purchased!',
+      }
+    case CREATE_ORDER_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: 'danger',
+        alertText: action.payload,
+      }
     default:
       return state
   }

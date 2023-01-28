@@ -1,4 +1,4 @@
-import React, { useContext, useReducer, useEffect } from 'react'
+import React, { useContext, useReducer, useEffect, useCallback } from 'react'
 import axios from 'axios'
 import reducer from './reducer'
 import {
@@ -54,6 +54,10 @@ import {
   CREATE_ORDER_BEGIN,
   CREATE_ORDER_SUCCESS,
   CREATE_ORDER_ERROR,
+  GET_PERSONAL_USER_ORDERS_BEGIN,
+  GET_PERSONAL_USER_ORDERS_SUCCESS,
+  GET_PERSONAL_USER_ORDERS_ERROR,
+  USER_IS_NOT_LOGGED_IN,
 } from './action'
 
 const initialState = {
@@ -102,7 +106,7 @@ const initialState = {
     category: 'all',
     price: 0,
   },
-  orders: [],
+  userPersonalOrders: [],
 }
 
 const AppContext = React.createContext()
@@ -369,6 +373,32 @@ const AppProvider = ({ children }) => {
     clearAlert()
   }
 
+  const getPersonalUserOrders = useCallback(async (abortController) => {
+    dispatch({ type: GET_PERSONAL_USER_ORDERS_BEGIN })
+    try {
+      const { data } = await axios.get(`/api/v1/order/getPersonalUserOrders`, {
+        signal: abortController.signal,
+      })
+      dispatch({
+        type: GET_PERSONAL_USER_ORDERS_SUCCESS,
+        payload: data.orders,
+      })
+    } catch (error) {
+      if (!abortController.signal.aborted) {
+        dispatch({
+          type: GET_PERSONAL_USER_ORDERS_ERROR,
+          payload: error.response.data,
+        })
+      }
+    }
+    clearAlert()
+  }, [])
+
+  const userIsNotLoggedIn = () => {
+    dispatch({ type: USER_IS_NOT_LOGGED_IN })
+    clearAlert()
+  }
+
   const showEditModal = () => {
     dispatch({ type: SHOW_EDIT_MODAL })
   }
@@ -434,6 +464,8 @@ const AppProvider = ({ children }) => {
         addProductToCartWithoutGoingIntoItsDetailPage,
         deleteProductInCart,
         createOrder,
+        getPersonalUserOrders,
+        userIsNotLoggedIn,
       }}
     >
       {children}

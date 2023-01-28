@@ -63,6 +63,18 @@ const CreditCardForm = () => {
   const buttonHandldDisable = () => {
     if (isLoading) return true
 
+    if (expireDateValidate.length === 5) {
+      const monthEntered = expireDateValidate.substring(0, 2)
+      const yearEntered = expireDateValidate.substring(3, 5)
+      const currentDate = new Date()
+      const currentYear = currentDate.getFullYear().toString().substring(2, 4)
+      const currentMonth = currentDate.getMonth()
+
+      if (monthEntered > 12 || yearEntered < currentYear) return true
+      else if (monthEntered < currentMonth + 1 || yearEntered < currentYear)
+        return true
+    }
+
     if (alertType === 'success') return true
 
     if (
@@ -111,7 +123,7 @@ const CreditCardForm = () => {
             type='text'
             value={expireDateValidate}
             maxLength='5'
-            placeholder='Date'
+            placeholder='mm/yy'
             className='p-2'
             onChange={expireDateHandler}
           />

@@ -7,7 +7,7 @@ import {
 import {
   createOrder,
   getAllOrders,
-  getAUserOrders,
+  getPersonalUserOrders,
 } from '../controllers/orderController.js'
 
 router
@@ -15,6 +15,8 @@ router
   .post(authenticationUser, createOrder)
   .get(authenticationUser, authorizePermissions('admin'), getAllOrders)
 
-router.route('/:id').get(authenticationUser, getAUserOrders)
+router
+  .route('/getPersonalUserOrders')
+  .get(authenticationUser, getPersonalUserOrders)
 
 export default router

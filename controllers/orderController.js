@@ -52,20 +52,12 @@ const createOrder = async (req, res) => {
     .json({ order, clientSecret: order.clientSecret })
 }
 
-const getAUserOrders = async (req, res) => {
+const getPersonalUserOrders = async (req, res) => {
   const orders = await Order.find({ user: req.user.userId })
+    .select('createdAt orderProducts status totalPrice user')
+    .sort('-createdAt')
 
-  if (!orders) {
-    throw new NotFoundError('No matching order tied to this user')
-  }
-
-  for (let i = 0; i < orders.length; i++) {
-    if (orders[0].user.toString() !== orders[i].user.toString())
-      throw new NotFoundError('No matching order tied to this user')
-  }
-
-  checkPermissions(req.user, orders[0].user)
-  res.send({ orders })
+  res.status(StatusCodes.OK).json({ orders })
 }
 
 const getAllOrders = async (req, res) => {
@@ -73,4 +65,4 @@ const getAllOrders = async (req, res) => {
   res.status(StatusCodes.OK).json({ orders })
 }
 
-export { createOrder, getAllOrders, getAUserOrders }
+export { createOrder, getAllOrders, getPersonalUserOrders }

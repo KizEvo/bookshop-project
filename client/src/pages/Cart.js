@@ -20,8 +20,8 @@ const Cart = () => {
             <div className='card-body p-4'>
               <div>
                 <p className='mb-0 me-5 d-flex justify-content-between align-items-center'>
-                  <span className='me-2 h4'>Order total</span>{' '}
-                  <span className='h4 mb-1'>${totalPriceOfProductsInCart}</span>
+                  <span className='me-2 h4 mb-0'>Order total</span>
+                  <span className='h4 mb-0'>${totalPriceOfProductsInCart}</span>
                 </p>
               </div>
             </div>
@@ -61,8 +61,8 @@ const Cart = () => {
           <div className='card-body p-4'>
             <div>
               <p className='mb-0 me-3 d-flex justify-content-between align-items-center'>
-                <span className='me-2 h4'>Order total</span>{' '}
-                <span className='h4 mb-1'>${totalPriceOfProductsInCart}</span>
+                <span className='me-2 h4 mb-0'>Order total</span>{' '}
+                <span className='h4 mb-0'>${totalPriceOfProductsInCart}</span>
               </p>
             </div>
           </div>

@@ -4,7 +4,7 @@ import useQuery from '../utils/query'
 
 const ProtectedRoute = ({ children, protectRoute }) => {
   const query = useQuery()
-  const { user, productsInCart } = useAppContext()
+  const { user, productsInCart, userIsNotLoggedIn } = useAppContext()
 
   if (user?.role) {
     const isProtectedRouteResetVerifyPassword =
@@ -12,7 +12,10 @@ const ProtectedRoute = ({ children, protectRoute }) => {
     if (isProtectedRouteResetVerifyPassword) return <Navigate to='/' />
   }
 
-  if (!user && protectRoute === 'checkout') return <Navigate to='/register' />
+  if (!user && protectRoute === 'checkout') {
+    userIsNotLoggedIn()
+    return <Navigate to='/register' />
+  }
 
   if (user && protectRoute === 'checkout' && productsInCart.length === 0)
     return <Navigate to='/products' />

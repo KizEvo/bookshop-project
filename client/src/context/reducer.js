@@ -51,6 +51,10 @@ import {
   CREATE_ORDER_BEGIN,
   CREATE_ORDER_SUCCESS,
   CREATE_ORDER_ERROR,
+  GET_PERSONAL_USER_ORDERS_BEGIN,
+  GET_PERSONAL_USER_ORDERS_SUCCESS,
+  GET_PERSONAL_USER_ORDERS_ERROR,
+  USER_IS_NOT_LOGGED_IN,
 } from './action'
 
 const reducer = (state, action) => {
@@ -492,7 +496,8 @@ const reducer = (state, action) => {
         isLoading: false,
         showAlert: true,
         alertType: 'success',
-        alertText: 'Payment completed, thanks you for your purchased!',
+        alertText:
+          'Payment completed, thanks you for your purchased! Redirecting...',
       }
     case CREATE_ORDER_ERROR:
       return {
@@ -501,6 +506,25 @@ const reducer = (state, action) => {
         showAlert: true,
         alertType: 'danger',
         alertText: action.payload,
+      }
+    case GET_PERSONAL_USER_ORDERS_BEGIN:
+      return { ...state, isLoading: true }
+    case GET_PERSONAL_USER_ORDERS_SUCCESS:
+      return { ...state, isLoading: false, userPersonalOrders: action.payload }
+    case GET_PERSONAL_USER_ORDERS_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: 'danger',
+        alertText: action.payload,
+      }
+    case USER_IS_NOT_LOGGED_IN:
+      return {
+        ...state,
+        showAlert: true,
+        alertType: 'danger',
+        alertText: 'Please log in to continue with the progress',
       }
     default:
       return state

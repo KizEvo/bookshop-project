@@ -6,8 +6,10 @@ import {
 } from '../middlewares/authentication.js'
 import {
   createOrder,
+  deleteOrder,
   getAllOrders,
   getPersonalUserOrders,
+  getSingleOrder,
 } from '../controllers/orderController.js'
 
 router
@@ -18,5 +20,10 @@ router
 router
   .route('/getPersonalUserOrders')
   .get(authenticationUser, getPersonalUserOrders)
+
+router
+  .route('/:id')
+  .get(authenticationUser, authorizePermissions('admin'), getSingleOrder)
+  .delete(authenticationUser, authorizePermissions('admin'), deleteOrder)
 
 export default router

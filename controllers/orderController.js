@@ -2,7 +2,6 @@ import { StatusCodes } from 'http-status-codes'
 import { BadRequestError, NotFoundError } from '../errors/index.js'
 import Order from '../models/Order.js'
 import Product from '../models/Product.js'
-import checkPermissions from '../utils/checkPermissions.js'
 
 const fakeStripeAPI = (amount, currency) => {
   const client_secret = 'randomSecret'
@@ -61,8 +60,37 @@ const getPersonalUserOrders = async (req, res) => {
 }
 
 const getAllOrders = async (req, res) => {
-  const orders = await Order.find({})
+  const orders = await Order.find({}).select('-clientSecret')
   res.status(StatusCodes.OK).json({ orders })
 }
 
-export { createOrder, getAllOrders, getPersonalUserOrders }
+const getSingleOrder = async (req, res) => {
+  const orderId = req.params.id
+
+  if (orderId.length !== 24)
+    throw new BadRequestError('Please provide the correct Order ID format')
+
+  const order = await Order.findById(orderId).select('-clientSecret')
+
+  if (!order) throw new NotFoundError('No order was found with this ID')
+
+  res.status(StatusCodes.OK).json({ order })
+}
+
+const deleteOrder = async (req, res) => {
+  const orderId = req.params.id
+
+  if (orderId.length !== 24)
+    throw new BadRequestError('Please provide the correct order ID format')
+
+  await Order.deleteOne({ _id: orderId })
+  res.status(StatusCodes.OK).json('success')
+}
+
+export {
+  createOrder,
+  getAllOrders,
+  getPersonalUserOrders,
+  getSingleOrder,
+  deleteOrder,
+}

@@ -17,14 +17,8 @@ const LoginForm = () => {
   const navigate = useNavigate()
   const [values, setValues] = useState(initialState)
 
-  const {
-    isLoading,
-    showAlert,
-    displayAlert,
-    registerUser,
-    loginUser,
-    user
-  } = useAppContext()
+  const { isLoading, showAlert, displayAlert, registerUser, loginUser, user } =
+    useAppContext()
 
   const navigateForgotPassword = () => {
     navigate('/forgot-password')
@@ -71,7 +65,7 @@ const LoginForm = () => {
 
   return (
     <>
-      <div className='form form-background m-auto'>
+      <div className='form form-background m-auto shadow'>
         <Form onSubmit={onSubmit}>
           <Logo />
           {showAlert && <Alert />}

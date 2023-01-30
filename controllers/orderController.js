@@ -1,4 +1,5 @@
 import { StatusCodes } from 'http-status-codes'
+import mongoose from 'mongoose'
 import { BadRequestError, NotFoundError } from '../errors/index.js'
 import Order from '../models/Order.js'
 import Product from '../models/Product.js'
@@ -60,8 +61,81 @@ const getPersonalUserOrders = async (req, res) => {
 }
 
 const getAllOrders = async (req, res) => {
-  const orders = await Order.find({}).select('-clientSecret')
-  res.status(StatusCodes.OK).json({ orders })
+  const { orderId } = req.query
+
+  if (orderId && orderId.length !== 24)
+    throw new BadRequestError('Please provide the correct Order ID format')
+
+  const page = Number(req.query.page) || 1
+  const limit = 5
+
+  const skip = (page - 1) * limit
+
+  const filterOrder = []
+  if (orderId) {
+    filterOrder.push(
+      { $match: { _id: mongoose.Types.ObjectId(orderId) } },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'user',
+          foreignField: '_id',
+          as: 'users',
+        },
+      },
+      {
+        $unwind: '$users',
+      },
+      {
+        $project: {
+          orderProducts: 1,
+          totalPrice: 1,
+          status: 1,
+          createdAt: 1,
+          customerInfo: {
+            name: '$users.name',
+            shippingLocation: '$users.shippingLocation',
+          },
+        },
+      }
+    )
+  } else if (!orderId) {
+    filterOrder.push(
+      { $skip: skip },
+      { $limit: limit },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'user',
+          foreignField: '_id',
+          as: 'users',
+        },
+      },
+      { $unwind: '$users' },
+      {
+        $project: {
+          orderProducts: 1,
+          totalPrice: 1,
+          status: 1,
+          createdAt: 1,
+          customerInfo: {
+            name: '$users.name',
+            shippingLocation: '$users.shippingLocation',
+          },
+        },
+      }
+    )
+  }
+
+  const totalOrders = await Order.countDocuments({})
+  const numberOfPagesOrders = Math.ceil(totalOrders / limit)
+
+  const dataToSendBack = await Order.aggregate(filterOrder)
+
+  res.status(StatusCodes.OK).json({
+    orders: dataToSendBack,
+    numberOfPagesOrders,
+  })
 }
 
 const getSingleOrder = async (req, res) => {

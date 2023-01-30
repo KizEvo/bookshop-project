@@ -1,8 +1,9 @@
 import { linksAdmin } from '../utils/links'
-import NavLinksComponent from './NavLinksComponent'
-import Logo from './Logo'
 import { useAppContext } from '../context/appContext'
 import { NavLink } from 'react-router-dom'
+import NavLinksComponent from './NavLinksComponent'
+import Logo from './Logo'
+
 const BigSidebar = () => {
   const { showAdminSidebar } = useAppContext()
   return (
@@ -26,7 +27,9 @@ const BigSidebar = () => {
             )
           })}
         </div>
-        <NavLink to='/' className='btn btn-primary m-3 mt-auto'>Return Home</NavLink>
+        <NavLink to='/' className='btn btn-primary m-3 mt-auto'>
+          Return Home
+        </NavLink>
       </div>
     </div>
   )

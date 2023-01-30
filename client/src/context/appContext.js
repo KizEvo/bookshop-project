@@ -58,6 +58,12 @@ import {
   GET_PERSONAL_USER_ORDERS_SUCCESS,
   GET_PERSONAL_USER_ORDERS_ERROR,
   USER_IS_NOT_LOGGED_IN,
+  GET_ALL_ORDERS_ADMIN_BEGIN,
+  GET_ALL_ORDERS_ADMIN_SUCCESS,
+  GET_ALL_ORDERS_ADMIN_ERROR,
+  GET_SINGLE_ORDER_ADMIN_BEGIN,
+  GET_SINGLE_ORDER_ADMIN_SUCCESS,
+  GET_SINGLE_ORDER_ADMIN_ERROR,
 } from './action'
 
 const initialState = {
@@ -75,6 +81,7 @@ const initialState = {
   totalUser: {},
   totalProducts: 0,
   numberOfPages: 1,
+  numberOfPagesOrders: 1,
   page: 1,
   monthlyUser: [],
   totalPriceOfProductsInCart: 0,
@@ -107,6 +114,7 @@ const initialState = {
     price: 0,
   },
   userPersonalOrders: [],
+  adminAllOrders: [],
 }
 
 const AppContext = React.createContext()
@@ -394,6 +402,38 @@ const AppProvider = ({ children }) => {
     clearAlert()
   }, [])
 
+  const getSingleOrderAdmin = async (orderId) => {
+    dispatch({ type: GET_SINGLE_ORDER_ADMIN_BEGIN })
+    try {
+      const { data } = await axios.get(`/api/v1/order?orderId=${orderId}`)
+      dispatch({ type: GET_SINGLE_ORDER_ADMIN_SUCCESS, payload: data })
+    } catch (error) {
+      dispatch({
+        type: GET_SINGLE_ORDER_ADMIN_ERROR,
+        payload: error.response.data.msg,
+      })
+    }
+    clearAlert()
+  }
+
+  const getAllOrdersAdmin = useCallback(async (abortController, page) => {
+    dispatch({ type: GET_ALL_ORDERS_ADMIN_BEGIN })
+    try {
+      const { data } = await axios.get(`/api/v1/order?page=${page}`, {
+        signal: abortController.signal,
+      })
+      dispatch({ type: GET_ALL_ORDERS_ADMIN_SUCCESS, payload: data })
+    } catch (error) {
+      if (!abortController.signal.aborted) {
+        dispatch({
+          type: GET_ALL_ORDERS_ADMIN_ERROR,
+          payload: error.response.data,
+        })
+      }
+    }
+    clearAlert()
+  }, [])
+
   const userIsNotLoggedIn = () => {
     dispatch({ type: USER_IS_NOT_LOGGED_IN })
     clearAlert()
@@ -466,6 +506,8 @@ const AppProvider = ({ children }) => {
         createOrder,
         getPersonalUserOrders,
         userIsNotLoggedIn,
+        getSingleOrderAdmin,
+        getAllOrdersAdmin,
       }}
     >
       {children}

@@ -17,6 +17,12 @@ const errorHandlerMiddleware = (err, req, res, next) => {
         .join(',')
     }
   }
+
+  if (err.name === 'CastError' && err.kind === 'ObjectId') {
+    defaultError.statusCode = StatusCodes.BAD_REQUEST
+    defaultError.msg = 'Please provide correct and existing ID'
+  }
+
   // Object.keys tao ra 1 array voi cac properties cua chinh Object dc goi theo thu tu sap xep
   if (err.code && err.code === 11000) {
     defaultError.statusCode = StatusCodes.BAD_GATEWAY

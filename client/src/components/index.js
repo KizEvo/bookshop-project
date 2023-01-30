@@ -10,7 +10,7 @@ import BigSidebar from './BigSidebar'
 import SmallSidebar from './SmallSidebar'
 import AdminNavbarComponent from './AdminNavbarComponent'
 import ProductContainer from './ProductContainer'
-import SearchFormAdmin from './SearchFormAdmin'
+import SearchFormAllProductsAdmin from './SearchFormAllProductsAdmin'
 import Product from './Product'
 import EditProduct from './EditProduct'
 import ProductStatsContainer from './ProductStatsContainer'
@@ -25,6 +25,9 @@ import SingleProductDetail from './SingleProductDetail'
 import CartCard from './CartCard'
 import CartCardContainer from './CartCardContainer'
 import CreditCardForm from './CreditCardForm'
+import SearchFormSingleOrderAdmin from './SearchFormSingleOrderAdmin'
+import AllOrdersContainerAdmin from './AllOrdersContainerAdmin'
+import PaginationBtnOrders from './PaginationBtnOrders'
 
 export {
   NavbarComponent,
@@ -38,7 +41,7 @@ export {
   SmallSidebar,
   AdminNavbarComponent,
   ProductContainer,
-  SearchFormAdmin,
+  SearchFormAllProductsAdmin,
   Product,
   EditProduct,
   ChartContainer,
@@ -54,4 +57,7 @@ export {
   CartCardContainer,
   CreditCardForm,
   OrderList,
+  SearchFormSingleOrderAdmin,
+  AllOrdersContainerAdmin,
+  PaginationBtnOrders,
 }

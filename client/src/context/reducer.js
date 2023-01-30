@@ -55,6 +55,12 @@ import {
   GET_PERSONAL_USER_ORDERS_SUCCESS,
   GET_PERSONAL_USER_ORDERS_ERROR,
   USER_IS_NOT_LOGGED_IN,
+  GET_ALL_ORDERS_ADMIN_BEGIN,
+  GET_ALL_ORDERS_ADMIN_SUCCESS,
+  GET_ALL_ORDERS_ADMIN_ERROR,
+  GET_SINGLE_ORDER_ADMIN_BEGIN,
+  GET_SINGLE_ORDER_ADMIN_SUCCESS,
+  GET_SINGLE_ORDER_ADMIN_ERROR,
 } from './action'
 
 const reducer = (state, action) => {
@@ -525,6 +531,39 @@ const reducer = (state, action) => {
         showAlert: true,
         alertType: 'danger',
         alertText: 'Please log in to continue with the progress',
+      }
+    case GET_ALL_ORDERS_ADMIN_BEGIN:
+      return { ...state, isLoading: true }
+    case GET_ALL_ORDERS_ADMIN_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        adminAllOrders: [...action.payload.orders],
+        numberOfPagesOrders: action.payload.numberOfPagesOrders,
+      }
+    case GET_ALL_ORDERS_ADMIN_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: 'danger',
+        alertText: action.payload,
+      }
+    case GET_SINGLE_ORDER_ADMIN_BEGIN:
+      return { ...state, isLoading: true }
+    case GET_SINGLE_ORDER_ADMIN_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        adminAllOrders: [...action.payload.orders],
+      }
+    case GET_SINGLE_ORDER_ADMIN_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: 'danger',
+        alertText: action.payload,
       }
     default:
       return state

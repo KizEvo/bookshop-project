@@ -1,5 +1,6 @@
 import { BiCaretLeft, BiCaretRight } from 'react-icons/bi'
 import { useAppContext } from '../context/appContext'
+
 const PaginationBtn = () => {
   const { numberOfPages, page, changePage } = useAppContext()
   const pages = Array.from({ length: numberOfPages }, (_, index) => {
@@ -24,10 +25,7 @@ const PaginationBtn = () => {
   return (
     <div className='container mt-4'>
       <div className='d-flex justify-content-end align-items-center'>
-        <BiCaretLeft
-          className='icon-pagination'
-          onClick={() => prevPage()}
-        />
+        <BiCaretLeft className='icon-pagination' onClick={() => prevPage()} />
         {pages.map((pageNumber) => {
           return (
             <button
@@ -44,10 +42,7 @@ const PaginationBtn = () => {
             </button>
           )
         })}
-        <BiCaretRight
-          className='icon-pagination'
-          onClick={() => nextPage()}
-        />
+        <BiCaretRight className='icon-pagination' onClick={() => nextPage()} />
       </div>
     </div>
   )

@@ -15,10 +15,11 @@ import {
   VerifyResetPassword,
   Dashboard,
   SharedLayoutAdmin,
-  GetAllProducts,
+  AllProducts,
   CreateProduct,
   SingleProductInfoPage,
   Checkout,
+  AllOrders,
 } from './pages'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useAppContext } from './context/appContext'
@@ -86,8 +87,9 @@ function App() {
           }
         >
           <Route index element={<Dashboard />} />
-          <Route path='products' element={<GetAllProducts />} />
+          <Route path='products' element={<AllProducts />} />
           <Route path='create-product' element={<CreateProduct />} />
+          <Route path='orders' element={<AllOrders />} />
         </Route>
         {/* ERROR PAGE */}
         <Route path='*' element={<Error />} />

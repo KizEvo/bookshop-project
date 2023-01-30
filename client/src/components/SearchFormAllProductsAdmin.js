@@ -22,7 +22,7 @@ const initialState = {
   ],
 }
 
-const SearchFormAdmin = () => {
+const SearchFormAllProductsAdmin = () => {
   const { getSearchProductInput, isLoading } = useAppContext()
   const [values, setValues] = useState(initialState)
 
@@ -129,4 +129,4 @@ const SearchFormAdmin = () => {
     </section>
   )
 }
-export default SearchFormAdmin
+export default SearchFormAllProductsAdmin

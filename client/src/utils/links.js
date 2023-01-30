@@ -1,6 +1,8 @@
 import { RiDashboardFill } from 'react-icons/ri'
 import { MdLibraryAdd } from 'react-icons/md'
 import { FcStatistics } from 'react-icons/fc'
+import { FiPackage } from 'react-icons/fi'
+
 const links = [
   { id: 1, text: 'Home', path: '/' },
   { id: 2, text: 'About', path: 'about' },
@@ -25,6 +27,12 @@ const linksAdmin = [
     text: 'Create Product',
     path: 'create-product',
     icon: <MdLibraryAdd />,
+  },
+  {
+    id: 4,
+    text: 'All Orders',
+    path: 'orders',
+    icon: <FiPackage />,
   },
 ]
 export { links, linksAdmin }

@@ -10,6 +10,7 @@ import {
   getAllOrders,
   getPersonalUserOrders,
   getSingleOrder,
+  updateOrder,
 } from '../controllers/orderController.js'
 
 router
@@ -24,6 +25,7 @@ router
 router
   .route('/:id')
   .get(authenticationUser, authorizePermissions('admin'), getSingleOrder)
+  .patch(authenticationUser, authorizePermissions('admin'), updateOrder)
   .delete(authenticationUser, authorizePermissions('admin'), deleteOrder)
 
 export default router

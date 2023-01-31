@@ -151,6 +151,36 @@ const getSingleOrder = async (req, res) => {
   res.status(StatusCodes.OK).json({ order })
 }
 
+const updateOrder = async (req, res) => {
+  const { status } = req.body
+
+  const order = await Order.findOne({ _id: req.params.id })
+  if (!order) {
+    throw new NotFoundError('Order does not exist')
+  }
+
+  if (!status) {
+    throw new BadRequestError('Please provide correct status for the order')
+  }
+
+  const statusIsDelivering = status === 'delivering'
+  const statusIsArrived = status === 'arrived'
+
+  if (!statusIsArrived && !statusIsDelivering) {
+    throw new BadRequestError('Please provide correct status for the order')
+  }
+
+  if (order.status === status) {
+    throw new BadRequestError(
+      'The current order status is matching the input status, please provide a new value if you wish to update'
+    )
+  }
+
+  order.status = status
+  await order.save()
+  res.status(StatusCodes.OK).json('success')
+}
+
 const deleteOrder = async (req, res) => {
   const orderId = req.params.id
 
@@ -167,4 +197,5 @@ export {
   getPersonalUserOrders,
   getSingleOrder,
   deleteOrder,
+  updateOrder,
 }

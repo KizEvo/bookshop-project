@@ -61,6 +61,10 @@ import {
   GET_SINGLE_ORDER_ADMIN_BEGIN,
   GET_SINGLE_ORDER_ADMIN_SUCCESS,
   GET_SINGLE_ORDER_ADMIN_ERROR,
+  CHANGE_PAGE_ORDER,
+  UPDATE_ORDER_BEGIN,
+  UPDATE_ORDER_SUCCESS,
+  UPDATE_ORDER_ERROR,
 } from './action'
 
 const reducer = (state, action) => {
@@ -375,6 +379,8 @@ const reducer = (state, action) => {
         ...state,
         page: action.payload,
       }
+    case CHANGE_PAGE_ORDER:
+      return { ...state, pageInAdminOrderPage: action.payload }
     case FETCH_SINGLE_PRODUCT_DETAIL_BEGIN:
       return { ...state, isLoading: true }
     case FETCH_SINGLE_PRODUCT_DETAIL_SUCCESS:
@@ -506,6 +512,24 @@ const reducer = (state, action) => {
           'Payment completed, thanks you for your purchased! Redirecting...',
       }
     case CREATE_ORDER_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: 'danger',
+        alertText: action.payload,
+      }
+    case UPDATE_ORDER_BEGIN:
+      return { ...state, isLoading: true }
+    case UPDATE_ORDER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: 'success',
+        alertText: 'Order updated successfully!',
+      }
+    case UPDATE_ORDER_ERROR:
       return {
         ...state,
         isLoading: false,

@@ -3,7 +3,7 @@ import { useAppContext } from '../context/appContext'
 import Alert from './Alert'
 
 const SearchFormSingleOrderAdmin = () => {
-  const { getSingleOrderAdmin, showAlert, isLoading } = useAppContext()
+  const { getSingleOrderAdmin, showAlert } = useAppContext()
 
   const [invalidOrderId, setInValidOrderId] = useState(false)
   const [enteredOrderId, setEnterOrderId] = useState('')
@@ -50,7 +50,7 @@ const SearchFormSingleOrderAdmin = () => {
           type='text'
           id='search-single-order'
           className='flex-fill px-2 py-1 border rounded'
-          placeholder='Order id...'
+          placeholder='24-digit ID...'
           value={enteredOrderId}
           onChange={orderIdInputHandler}
         />

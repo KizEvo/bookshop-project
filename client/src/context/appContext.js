@@ -64,6 +64,10 @@ import {
   GET_SINGLE_ORDER_ADMIN_BEGIN,
   GET_SINGLE_ORDER_ADMIN_SUCCESS,
   GET_SINGLE_ORDER_ADMIN_ERROR,
+  CHANGE_PAGE_ORDER,
+  UPDATE_ORDER_BEGIN,
+  UPDATE_ORDER_SUCCESS,
+  UPDATE_ORDER_ERROR,
 } from './action'
 
 const initialState = {
@@ -83,6 +87,7 @@ const initialState = {
   numberOfPages: 1,
   numberOfPagesOrders: 1,
   page: 1,
+  pageInAdminOrderPage: 1,
   monthlyUser: [],
   totalPriceOfProductsInCart: 0,
   productsInCart: [],
@@ -376,9 +381,30 @@ const AppProvider = ({ children }) => {
       })
       dispatch({ type: CREATE_ORDER_SUCCESS })
     } catch (error) {
-      dispatch({ type: CREATE_ORDER_ERROR, payload: error.response.data })
+      dispatch({
+        type: CREATE_ORDER_ERROR,
+        payload: error.response.data || error.response.data.msg,
+      })
     }
     clearAlert()
+  }
+
+  const updateOrder = async (orderId, newStatus) => {
+    dispatch({ type: UPDATE_ORDER_BEGIN })
+    try {
+      await axios.patch(`/api/v1/order/${orderId}`, { status: newStatus })
+      dispatch({ type: UPDATE_ORDER_SUCCESS })
+    } catch (error) {
+      dispatch({
+        type: UPDATE_ORDER_ERROR,
+        payload: error.response.data.msg || error.response.data,
+      })
+    }
+    clearAlert()
+  }
+
+  const deleteOrder = async (orderId) => {
+    console.log(orderId)
   }
 
   const getPersonalUserOrders = useCallback(async (abortController) => {
@@ -395,7 +421,7 @@ const AppProvider = ({ children }) => {
       if (!abortController.signal.aborted) {
         dispatch({
           type: GET_PERSONAL_USER_ORDERS_ERROR,
-          payload: error.response.data,
+          payload: error.response.data || error.response.data.msg,
         })
       }
     }
@@ -410,29 +436,35 @@ const AppProvider = ({ children }) => {
     } catch (error) {
       dispatch({
         type: GET_SINGLE_ORDER_ADMIN_ERROR,
-        payload: error.response.data.msg,
+        payload: error.response.data || error.response.data.msg,
       })
     }
     clearAlert()
   }
 
-  const getAllOrdersAdmin = useCallback(async (abortController, page) => {
-    dispatch({ type: GET_ALL_ORDERS_ADMIN_BEGIN })
-    try {
-      const { data } = await axios.get(`/api/v1/order?page=${page}`, {
-        signal: abortController.signal,
-      })
-      dispatch({ type: GET_ALL_ORDERS_ADMIN_SUCCESS, payload: data })
-    } catch (error) {
-      if (!abortController.signal.aborted) {
-        dispatch({
-          type: GET_ALL_ORDERS_ADMIN_ERROR,
-          payload: error.response.data,
-        })
+  const getAllOrdersAdmin = useCallback(
+    async (abortController) => {
+      dispatch({ type: GET_ALL_ORDERS_ADMIN_BEGIN })
+      try {
+        const { data } = await axios.get(
+          `/api/v1/order?page=${state.pageInAdminOrderPage}`,
+          {
+            signal: abortController.signal,
+          }
+        )
+        dispatch({ type: GET_ALL_ORDERS_ADMIN_SUCCESS, payload: data })
+      } catch (error) {
+        if (!abortController.signal.aborted) {
+          dispatch({
+            type: GET_ALL_ORDERS_ADMIN_ERROR,
+            payload: error.response.data || error.response.data.msg,
+          })
+        }
       }
-    }
-    clearAlert()
-  }, [])
+      clearAlert()
+    },
+    [state?.pageInAdminOrderPage]
+  )
 
   const userIsNotLoggedIn = () => {
     dispatch({ type: USER_IS_NOT_LOGGED_IN })
@@ -454,6 +486,10 @@ const AppProvider = ({ children }) => {
   const changePage = (page) => {
     dispatch({ type: CHANGE_PAGE, payload: page })
   }
+  const changePageOrder = (page) => {
+    dispatch({ type: CHANGE_PAGE_ORDER, payload: page })
+  }
+
   useEffect(() => {
     const abortController = new AbortController()
     const fetchUser = async () => {
@@ -499,6 +535,7 @@ const AppProvider = ({ children }) => {
         showStats,
         getSearchProductInput,
         changePage,
+        changePageOrder,
         fetchSingleProduct,
         addProductToCartInItsDetailPage,
         addProductToCartWithoutGoingIntoItsDetailPage,
@@ -508,6 +545,8 @@ const AppProvider = ({ children }) => {
         userIsNotLoggedIn,
         getSingleOrderAdmin,
         getAllOrdersAdmin,
+        updateOrder,
+        deleteOrder,
       }}
     >
       {children}

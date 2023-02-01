@@ -45,7 +45,7 @@ const Cart = () => {
   }
 
   return (
-    <section className='container'>
+    <section className='container mb-3'>
       <p className='mt-5'>
         <span className='h2'>Shopping Cart </span>
         <span className='h4'>

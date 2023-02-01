@@ -1,6 +1,12 @@
+import { FeaturedProductsSection, HeroSection } from '../components'
 
 const Home = () => {
-  return <h1>HOME PAGE</h1>
+  return (
+    <section>
+      <HeroSection />
+      <FeaturedProductsSection />
+    </section>
+  )
 }
 
 export default Home

@@ -62,9 +62,10 @@ import {
   GET_SINGLE_ORDER_ADMIN_SUCCESS,
   GET_SINGLE_ORDER_ADMIN_ERROR,
   CHANGE_PAGE_ORDER,
-  UPDATE_ORDER_BEGIN,
   UPDATE_ORDER_SUCCESS,
   UPDATE_ORDER_ERROR,
+  DELETE_ORDER_SUCCESS,
+  DELETE_ORDER_ERROR,
 } from './action'
 
 const reducer = (state, action) => {
@@ -519,8 +520,6 @@ const reducer = (state, action) => {
         alertType: 'danger',
         alertText: action.payload,
       }
-    case UPDATE_ORDER_BEGIN:
-      return { ...state, isLoading: true }
     case UPDATE_ORDER_SUCCESS:
       return {
         ...state,
@@ -528,8 +527,26 @@ const reducer = (state, action) => {
         showAlert: true,
         alertType: 'success',
         alertText: 'Order updated successfully!',
+        updatedOrderFlag: !state.updatedOrderFlag,
       }
     case UPDATE_ORDER_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: 'danger',
+        alertText: action.payload,
+      }
+    case DELETE_ORDER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: 'success',
+        alertText: 'Order deleted successfully!',
+        deletedOrderFlag: !state.deletedOrderFlag,
+      }
+    case DELETE_ORDER_ERROR:
       return {
         ...state,
         isLoading: false,

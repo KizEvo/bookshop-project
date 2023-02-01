@@ -97,7 +97,8 @@ const getAllOrders = async (req, res) => {
             shippingLocation: '$users.shippingLocation',
           },
         },
-      }
+      },
+      { $sort: { createdAt: -1 } }
     )
   } else if (!orderId) {
     filterOrder.push(
@@ -123,7 +124,8 @@ const getAllOrders = async (req, res) => {
             shippingLocation: '$users.shippingLocation',
           },
         },
-      }
+      },
+      { $sort: { createdAt: -1 } }
     )
   }
 

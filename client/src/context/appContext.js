@@ -65,9 +65,10 @@ import {
   GET_SINGLE_ORDER_ADMIN_SUCCESS,
   GET_SINGLE_ORDER_ADMIN_ERROR,
   CHANGE_PAGE_ORDER,
-  UPDATE_ORDER_BEGIN,
   UPDATE_ORDER_SUCCESS,
   UPDATE_ORDER_ERROR,
+  DELETE_ORDER_SUCCESS,
+  DELETE_ORDER_ERROR,
 } from './action'
 
 const initialState = {
@@ -120,6 +121,8 @@ const initialState = {
   },
   userPersonalOrders: [],
   adminAllOrders: [],
+  updatedOrderFlag: false,
+  deletedOrderFlag: true,
 }
 
 const AppContext = React.createContext()
@@ -383,14 +386,13 @@ const AppProvider = ({ children }) => {
     } catch (error) {
       dispatch({
         type: CREATE_ORDER_ERROR,
-        payload: error.response.data || error.response.data.msg,
+        payload: error.response.data.msg || error.response.data,
       })
     }
     clearAlert()
   }
 
   const updateOrder = async (orderId, newStatus) => {
-    dispatch({ type: UPDATE_ORDER_BEGIN })
     try {
       await axios.patch(`/api/v1/order/${orderId}`, { status: newStatus })
       dispatch({ type: UPDATE_ORDER_SUCCESS })
@@ -404,7 +406,16 @@ const AppProvider = ({ children }) => {
   }
 
   const deleteOrder = async (orderId) => {
-    console.log(orderId)
+    try {
+      await axios.delete(`/api/v1/order/${orderId}`)
+      dispatch({ type: DELETE_ORDER_SUCCESS })
+    } catch (error) {
+      dispatch({
+        type: DELETE_ORDER_ERROR,
+        payload: error.response.data.msg || error.response.data,
+      })
+    }
+    clearAlert()
   }
 
   const getPersonalUserOrders = useCallback(async (abortController) => {
@@ -421,7 +432,7 @@ const AppProvider = ({ children }) => {
       if (!abortController.signal.aborted) {
         dispatch({
           type: GET_PERSONAL_USER_ORDERS_ERROR,
-          payload: error.response.data || error.response.data.msg,
+          payload: error.response.data.msg || error.response.data,
         })
       }
     }
@@ -436,7 +447,7 @@ const AppProvider = ({ children }) => {
     } catch (error) {
       dispatch({
         type: GET_SINGLE_ORDER_ADMIN_ERROR,
-        payload: error.response.data || error.response.data.msg,
+        payload: error.response.data.msg || error.response.data,
       })
     }
     clearAlert()
@@ -457,7 +468,7 @@ const AppProvider = ({ children }) => {
         if (!abortController.signal.aborted) {
           dispatch({
             type: GET_ALL_ORDERS_ADMIN_ERROR,
-            payload: error.response.data || error.response.data.msg,
+            payload: error.response.data.msg || error.response.data,
           })
         }
       }

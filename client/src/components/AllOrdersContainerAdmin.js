@@ -5,8 +5,14 @@ import PaginationBtnOrders from './PaginationBtnOrders'
 import SingleOrderDetailAdmin from './SingleOrderDetailAdmin'
 
 const AllOrdersContainerAdmin = () => {
-  const { getAllOrdersAdmin, adminAllOrders, isLoading, numberOfPagesOrders } =
-    useAppContext()
+  const {
+    getAllOrdersAdmin,
+    adminAllOrders,
+    isLoading,
+    numberOfPagesOrders,
+    updatedOrderFlag,
+    deletedOrderFlag,
+  } = useAppContext()
 
   useEffect(() => {
     const abortController = new AbortController()
@@ -15,7 +21,7 @@ const AllOrdersContainerAdmin = () => {
     return () => {
       abortController.abort()
     }
-  }, [getAllOrdersAdmin])
+  }, [getAllOrdersAdmin, updatedOrderFlag, deletedOrderFlag])
 
   if (isLoading) {
     return <Loading pageLoading={isLoading} />

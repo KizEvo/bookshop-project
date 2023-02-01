@@ -13,10 +13,11 @@ import ProtectedRouteAdmin from './ProtectedRouteAdmin'
 import ForgotPassword from './ForgotPassword'
 import VerifyResetPassword from './VerifyResetPassword'
 import SharedLayoutAdmin from './Admin/SharedLayoutAdmin'
-import GetAllProducts from './Admin/GetAllProducts'
+import AllProducts from './Admin/AllProducts'
 import CreateProduct from './Admin/CreateProduct'
 import SingleProductInfoPage from './SingleProductInfoPage'
 import Checkout from './Checkout'
+import AllOrders from './Admin/AllOrders'
 
 export {
   About,
@@ -34,8 +35,9 @@ export {
   ForgotPassword,
   VerifyResetPassword,
   SharedLayoutAdmin,
-  GetAllProducts,
+  AllProducts,
   CreateProduct,
   SingleProductInfoPage,
   Checkout,
+  AllOrders,
 }

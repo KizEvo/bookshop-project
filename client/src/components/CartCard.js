@@ -17,7 +17,7 @@ const CartCard = (props) => {
               src={props.image}
               className='img-thumbnail'
               alt={props}
-              style={{ width: '8rem' }}
+              style={{ width: '8rem', height: '12rem' }}
             />
           </div>
 

@@ -28,6 +28,8 @@ import CreditCardForm from './CreditCardForm'
 import SearchFormSingleOrderAdmin from './SearchFormSingleOrderAdmin'
 import AllOrdersContainerAdmin from './AllOrdersContainerAdmin'
 import PaginationBtnOrders from './PaginationBtnOrders'
+import HeroSection from './HeroSection'
+import FeaturedProductsSection from './FeaturedProductsSection'
 
 export {
   NavbarComponent,
@@ -59,5 +61,7 @@ export {
   OrderList,
   SearchFormSingleOrderAdmin,
   AllOrdersContainerAdmin,
+  HeroSection,
   PaginationBtnOrders,
+  FeaturedProductsSection,
 }

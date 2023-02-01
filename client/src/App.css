@@ -88,6 +88,42 @@ STYLES
   }
 }
 
+/* HOMEPAGE */
+
+.heading-home-page h1,
+.heading-home-page div span {
+  font-family: Helvetica;
+  font-size: 5rem;
+  font-weight: bold;
+  letter-spacing: -3px;
+}
+
+.b-text-rotate {
+  transform: rotate(-20deg);
+  margin-bottom: 0;
+  background-color: rgb(6, 206, 173);
+}
+
+.hero-home-page {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+@media (max-width: 576px) {
+  .heading-home-page h1,
+  .heading-home-page div span {
+    font-size: 3.5rem;
+  }
+  .hero-home-page {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+}
+
+/* 
+  background-color: rgba(139, 255, 255, 0.829);
+ */
+
 .checkout-background-img {
   background-image: url(./assets/checkout-background-page-image.jpg);
   background-size: cover;

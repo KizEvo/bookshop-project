@@ -8,7 +8,7 @@ import logo from '../assets/book-logo.png'
 
 const Footer = () => {
   return (
-    <footer className='mt-3 p-4 pb-5 bg-success bg-opacity-25'>
+    <footer className='p-4 pb-5 bg-success bg-opacity-25'>
       <div className='d-md-flex container gap-5'>
         <div className='w-75'>
           <div className='footer-logo'>

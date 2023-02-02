@@ -1,10 +1,15 @@
-import { FeaturedProductsSection, HeroSection } from '../components'
+import {
+  FeaturedProductsSection,
+  HeroSection,
+  SubscribeSection,
+} from '../components'
 
 const Home = () => {
   return (
     <section>
       <HeroSection />
       <FeaturedProductsSection />
+      <SubscribeSection />
     </section>
   )
 }

@@ -109,6 +109,37 @@ STYLES
   padding-bottom: 8rem;
 }
 
+.img-overlay {
+  position: relative;
+}
+
+.img-overlay svg {
+  position: absolute;
+  visibility: hidden;
+  color: white;
+  width: 2.5rem;
+  height: 0;
+  opacity: 0;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background-color: rgb(44, 62, 80);
+  top: 40%;
+  left: 40%;
+  z-index: 1000;
+  transition: all 0.3s linear;
+}
+
+.img-overlay:hover img {
+  filter: brightness(50%);
+  transition: all 0.3s linear;
+}
+
+.img-overlay:hover svg {
+  visibility: visible;
+  height: 2.5rem;
+  opacity: 1;
+}
+
 @media (max-width: 576px) {
   .heading-home-page h1,
   .heading-home-page div span {

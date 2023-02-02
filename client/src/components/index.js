@@ -30,6 +30,7 @@ import AllOrdersContainerAdmin from './AllOrdersContainerAdmin'
 import PaginationBtnOrders from './PaginationBtnOrders'
 import HeroSection from './HeroSection'
 import FeaturedProductsSection from './FeaturedProductsSection'
+import SubscribeSection from './SubscribeSection'
 
 export {
   NavbarComponent,
@@ -64,4 +65,5 @@ export {
   HeroSection,
   PaginationBtnOrders,
   FeaturedProductsSection,
+  SubscribeSection,
 }

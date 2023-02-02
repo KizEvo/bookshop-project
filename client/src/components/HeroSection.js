@@ -5,7 +5,7 @@ import heroSvg from '../assets/hero-svg-home.svg'
 const HeroSection = () => {
   return (
     <section className='full-screen d-flex justify-content-center justify-content-md-around hero-home-page'>
-      <div className='d-flex flex-column gap-5 align-items-center justify-content-around'>
+      <div className='d-flex flex-column gap-5 align-items-center justify-content-around align-items-sm-start'>
         <h4 className='mb-0'>
           Explore Your Favorite Books <FcReadingEbook />
         </h4>

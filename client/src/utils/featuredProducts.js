@@ -1,0 +1,80 @@
+const featuredProduct = [
+  {
+    _id: '6342af160f2b70be17cc84ab',
+    name: 'Manh',
+    price: 20,
+    description:
+      'This is a book about how to count your step I guess asknasfkafasfasfasssssssssssssssssssssssssssssssssssssssss',
+    category: 'historical',
+    author: 'Nguyen',
+    image:
+      'https://res.cloudinary.com/phucloud/image/upload/v1665314581/fileupload/tmp-1-1665314579735_imaxkz.png',
+    featured: true,
+    user: '630862af6ba43117e086105e',
+    createdAt: '2022-10-09T11:23:02.262Z',
+    updatedAt: '2022-10-09T11:23:02.262Z',
+    __v: 0,
+  },
+  {
+    _id: '6348f759353b3459290f59ec',
+    name: 'Quốc Đạt',
+    price: 10,
+    description: 'This is a book about ',
+    category: 'sci-fi',
+    author: 'cloud',
+    image:
+      'https://res.cloudinary.com/phucloud/image/upload/v1665726298/fileupload/tmp-1-1665726294925_hpfcec.jpg',
+    featured: false,
+    user: '630862af6ba43117e086105e',
+    createdAt: '2022-10-14T05:44:57.613Z',
+    updatedAt: '2022-10-14T05:44:57.613Z',
+    __v: 0,
+  },
+  {
+    _id: '6348f777353b3459290f59ee',
+    name: 'SUSHANG',
+    price: 31,
+    description: 'This is a book about how to count your step I guess',
+    category: 'historical',
+    author: 'mern',
+    image:
+      'https://res.cloudinary.com/phucloud/image/upload/v1665726327/fileupload/tmp-2-1665726324475_i8y4s6.png',
+    featured: false,
+    user: '630862af6ba43117e086105e',
+    createdAt: '2022-10-14T05:45:27.112Z',
+    updatedAt: '2022-10-14T05:45:27.112Z',
+    __v: 0,
+  },
+  {
+    _id: '6348f7e2353b3459290f59f8',
+    name: 'ARRET',
+    price: 37,
+    description: 'This is a book about how to count your step I guess',
+    category: 'historical',
+    author: 'Jacksteptieyes',
+    image:
+      'https://res.cloudinary.com/phucloud/image/upload/v1665726435/fileupload/tmp-5-1665726432162_ma6wmz.png',
+    featured: false,
+    user: '630862af6ba43117e086105e',
+    createdAt: '2022-10-14T05:47:14.533Z',
+    updatedAt: '2022-10-14T05:47:14.533Z',
+    __v: 0,
+  },
+  {
+    _id: '6348f7c5353b3459290f59f6',
+    name: 'hJohnsmwSS',
+    price: 78,
+    description: 'This is a book about how to count your step I guess',
+    category: 'mystery',
+    author: 'supbro',
+    image:
+      'https://res.cloudinary.com/phucloud/image/upload/v1665726405/fileupload/tmp-4-1665726402554_ouzdov.png',
+    featured: false,
+    user: '630862af6ba43117e086105e',
+    createdAt: '2022-10-14T05:46:45.072Z',
+    updatedAt: '2022-10-14T05:46:45.072Z',
+    __v: 0,
+  },
+]
+
+export default featuredProduct

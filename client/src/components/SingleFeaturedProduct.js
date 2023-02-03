@@ -1,10 +1,20 @@
 import { FiSearch } from 'react-icons/fi'
+import { useNavigate } from 'react-router-dom'
 
 const SingleFeaturedProduct = (props) => {
+  const navigate = useNavigate()
+
+  const iconNavigateHandler = () => {
+    navigate(`/products/${props.id}`)
+  }
+
   return (
-    <div>
+    <>
       <div className='img-overlay' id={`featured-products-${props.name}`}>
-        <FiSearch />
+        <FiSearch
+          className='hover-cursor-pointer'
+          onClick={iconNavigateHandler}
+        />
         <img
           src={props.image}
           alt='featured products'
@@ -13,12 +23,12 @@ const SingleFeaturedProduct = (props) => {
       </div>
       <label
         htmlFor={`featured-products-${props.name}`}
-        className='d-flex justify-content-between mt-3'
+        className='d-flex flex-column mt-3'
       >
-        <p>{props.name}</p>
+        <p className='mb-0'>{props.name}</p>
         <p className='text-success fw-bold'>${props.price}</p>
       </label>
-    </div>
+    </>
   )
 }
 export default SingleFeaturedProduct

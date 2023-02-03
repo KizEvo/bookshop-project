@@ -272,6 +272,7 @@ const AppProvider = ({ children }) => {
         })
       }
     }
+    clearAlert()
   }
 
   const fetchProduct = async (abortController) => {

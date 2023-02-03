@@ -1,13 +1,18 @@
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { SingleProductDetail } from '../components/index'
 import { useAppContext } from '../context/appContext'
 
 const SingleProductInfoPage = () => {
-  const { fetchSingleProduct } = useAppContext()
-
+  const { fetchSingleProduct, alertType } = useAppContext()
+  const navigate = useNavigate()
   const params = useLocation()
+
   const productId = params.pathname.split('/')[2]
+
+  if (alertType === 'danger') {
+    navigate('/')
+  }
 
   useEffect(() => {
     const abortController = new AbortController()
@@ -15,10 +20,10 @@ const SingleProductInfoPage = () => {
     return () => {
       abortController.abort()
     }
-  }, [])
+  }, [productId])
 
   return (
-    <section className=''>
+    <section className='h-100 py-5'>
       <SingleProductDetail />
     </section>
   )

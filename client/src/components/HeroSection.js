@@ -1,8 +1,15 @@
 import { BsFillArrowRightCircleFill } from 'react-icons/bs'
 import { FcReadingEbook } from 'react-icons/fc'
+import { useNavigate } from 'react-router-dom'
 import heroSvg from '../assets/hero-svg-home.svg'
 
 const HeroSection = () => {
+  const navigate = useNavigate()
+
+  const buttonHandler = () => {
+    navigate('/products')
+  }
+
   return (
     <section className='full-screen d-flex justify-content-center justify-content-md-around hero-home-page'>
       <div className='d-flex flex-column gap-5 align-items-center justify-content-around align-items-sm-start'>
@@ -27,6 +34,7 @@ const HeroSection = () => {
             type='button'
             className='btn btn-primary flex-sm-fill d-sm-flex justify-content-sm-between align-items-sm-center shadow'
             style={{ height: '4rem' }}
+            onClick={buttonHandler}
           >
             <span className='h4 mb-0 rounded bg-light text-primary py-2 px-3'>
               Go to shop

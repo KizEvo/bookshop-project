@@ -8,7 +8,7 @@ const SubscribeSection = () => {
           nemo laborum iste nisi asperiores amet dignissimos aspernatur possimus
           alias.
         </p>
-        <form className='d-flex align-items-center gap-2'>
+        <form className='d-flex flex-lg-row flex-column align-items-lg-center gap-2'>
           <input
             type='email'
             className='p-1 px-2 rounded'

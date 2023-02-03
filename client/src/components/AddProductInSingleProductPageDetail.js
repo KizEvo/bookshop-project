@@ -11,7 +11,7 @@ const AddProductInSingleProductPageDetail = () => {
   }
 
   return (
-    <div className='d-flex'>
+    <div className='d-flex flex-column flex-md-row gap-4 gap-md-2'>
       <input
         className='form-control text-center ps-4 me-3'
         type='number'

@@ -55,9 +55,7 @@ const getAllProducts = async (req, res) => {
   const totalProducts = await Product.countDocuments(queryObject)
   const numberOfPages = Math.ceil(totalProducts / limit)
 
-  res
-    .status(StatusCodes.OK)
-    .json({ products, totalProducts, numberOfPages })
+  res.status(StatusCodes.OK).json({ products, totalProducts, numberOfPages })
 }
 
 const getSingleProduct = async (req, res) => {
@@ -122,8 +120,14 @@ const showStats = async (req, res) => {
   }, {})
 
   //product category stats
+
+  const matchAdminId =
+    req.user.userId === '63ddaca09cd08c87a79a82d9'
+      ? '630862af6ba43117e086105e'
+      : '630862af6ba43117e086105e'
+
   let stats = await Product.aggregate([
-    { $match: { user: mongoose.Types.ObjectId(req.user.userId) } },
+    { $match: { user: mongoose.Types.ObjectId(matchAdminId) } },
     { $group: { _id: '$category', count: { $sum: 1 } } },
   ])
 

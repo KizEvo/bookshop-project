@@ -6,7 +6,7 @@ const SmallFilterFormPriceInput = (props) => {
   const handlePriceChange = (e) => {
     setQueriesState({ ...queriesState, price: e.target.value })
   }
-  
+
   return (
     <div className='py-2'>
       <h6>Price range</h6>
@@ -29,6 +29,7 @@ const SmallFilterFormPriceInput = (props) => {
             value={queriesState.price}
             onChange={handlePriceChange}
             min='0'
+            max='200'
           />
         </Form.Group>
       </div>

@@ -34,14 +34,14 @@ const VerifyResetPassword = () => {
 
   useEffect(() => {
     let isCanceled = false
-    if(!isCanceled){
-    setTimeout(() => {
-      if (isFinished) {
-        navigate('/register')
-      }
-    }, 3000)
-  }
-  return () => isCanceled = true
+    if (!isCanceled) {
+      setTimeout(() => {
+        if (isFinished) {
+          navigate('/register')
+        }
+      }, 3000)
+    }
+    return () => (isCanceled = true)
   }, [isFinished, navigate])
 
   return (
@@ -58,7 +58,10 @@ const VerifyResetPassword = () => {
               handleChange={handleChange}
               placeholder='Password'
             ></FormRow>
-            <button className='btn btn-primary mt-3' disabled={isLoading}>
+            <button
+              className='btn btn-primary mt-3'
+              disabled={isLoading || showAlert === 'success'}
+            >
               Confirm
             </button>
           </Form>

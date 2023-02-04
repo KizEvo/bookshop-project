@@ -48,4 +48,12 @@ const authorizePermissions = (...roles) => {
   }
 }
 
-export { authenticationUser, authorizePermissions }
+const unauthenticateTestAdmin = (req, res, next) => {
+  const testAdminId = '63ddaca09cd08c87a79a82d9'
+  if (req.user.userId === testAdminId)
+    throw new UnauthorizedError('Test Admin read only!')
+
+  next()
+}
+
+export { authenticationUser, authorizePermissions, unauthenticateTestAdmin }

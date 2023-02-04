@@ -14,8 +14,8 @@ const initialState = {
 }
 
 const LoginForm = () => {
-  const navigate = useNavigate()
   const [values, setValues] = useState(initialState)
+  const navigate = useNavigate()
 
   const { isLoading, showAlert, displayAlert, registerUser, loginUser, user } =
     useAppContext()
@@ -46,6 +46,15 @@ const LoginForm = () => {
       registerUser(currentUser)
     }
     setValues({ ...values, name: '', email: '', password: '' })
+  }
+
+  const onClickTestAdminButtonHandler = () => {
+    const testAdmin = {
+      email: 'testAdmin@gmail.com',
+      password: 'testAdminSecret123',
+    }
+
+    loginUser(testAdmin)
   }
 
   useEffect(() => {
@@ -95,14 +104,25 @@ const LoginForm = () => {
             handleChange={handleChange}
             placeholder='Password'
           />
-          <button
-            className='btn btn-primary'
-            type='submit'
-            disabled={isLoading}
-          >
-            {values.isMember ? 'Login' : 'Sign up '}
-          </button>
+          <div className='d-flex flex-column my-3 gap-3'>
+            <button
+              className='btn btn-primary'
+              type='submit'
+              disabled={isLoading}
+            >
+              {values.isMember ? 'Login' : 'Sign up '}
+            </button>
+            <button
+              type='button'
+              className='btn btn-info'
+              onClick={onClickTestAdminButtonHandler}
+              disabled={isLoading}
+            >
+              Test Admin
+            </button>
+          </div>
         </Form>
+
         <p>
           {values.isMember ? 'Not a member yet ?' : 'Already a member ?'}
           <button

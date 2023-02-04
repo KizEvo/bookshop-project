@@ -10,6 +10,7 @@ import { useAppContext } from '../context/appContext'
 const defaultQueriesState = {
   price: 0,
   category: '',
+  sort: 'newest',
 }
 
 const SmallFilterForm = () => {
@@ -29,6 +30,7 @@ const SmallFilterForm = () => {
       price: queriesState.price,
       category: queriesState.category,
       name: search.name,
+      sort: queriesState.sort,
     }
 
     const page = 1
@@ -48,6 +50,8 @@ const SmallFilterForm = () => {
       setSuccessMessage(false)
     }, timeout)
   }
+
+  const otherSearchOption = search.sort === 'newest' ? 'oldest' : 'newest'
 
   return (
     <div className='d-md-none'>
@@ -79,6 +83,21 @@ const SmallFilterForm = () => {
               queriesState={queriesState}
               setQueriesState={setQueriesState}
             />
+            <hr />
+            <h6>Sort</h6>
+            <select
+              value={queriesState.sort}
+              className='border rounded-pill px-2'
+              onChange={(e) => {
+                setQueriesState((prevState) => {
+                  return { ...prevState, sort: e.target.value }
+                })
+              }}
+            >
+              <option value={search.sort}>{search.sort}</option>
+              <option value={otherSearchOption}>{otherSearchOption}</option>
+            </select>
+            <hr />
             <div className='d-flex flex-column m-4'>
               <button className='btn btn-primary'>Search</button>
               {successMessage && (

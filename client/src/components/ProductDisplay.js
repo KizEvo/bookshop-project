@@ -12,6 +12,7 @@ const ProductDisplay = () => {
     search,
     numberOfPages,
     page,
+    isLoading,
   } = useAppContext()
 
   useEffect(() => {
@@ -32,6 +33,11 @@ const ProductDisplay = () => {
         {products.map((product) => {
           return <ProductUser key={product._id} {...product} />
         })}
+      </div>
+      <div className='text-center'>
+        {products.length === 0 && isFetchingProduct === false && (
+          <h4>No product available at the moment</h4>
+        )}
       </div>
       {numberOfPages > 1 && <PaginationBtn />}
       {numberOfPages === 0 && (

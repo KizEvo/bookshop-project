@@ -1,4 +1,4 @@
-import sendEmail from './sendEmail.js'
+import { sendGridEmail } from './sendEmail.js'
 
 const sendVerificationEmail = async ({
   name,
@@ -15,7 +15,7 @@ const sendVerificationEmail = async ({
      </a>
   </p>
   `
-  return sendEmail({
+  return sendGridEmail({
     to: email,
     subject: 'Email Confirmation',
     html: `<h4>Hello ${name},</h4>

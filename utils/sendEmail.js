@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer'
 import nodemailerConfig from './nodemailerConfig.js'
+import sgMail from '@sendgrid/mail'
 
 const sendEmail = async ({ to, subject, html }) => {
   let testAccount = await nodemailer.createTestAccount()
@@ -14,4 +15,16 @@ const sendEmail = async ({ to, subject, html }) => {
   })
 }
 
-export default sendEmail
+const sendGridEmail = async ({ to, subject, html }) => {
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+  const msg = {
+    to, // Change to your recipient
+    from: 'bookshopbspsg@gmail.com', // Change to your verified sender
+    subject,
+    html,
+  }
+
+  return sgMail.send(msg)
+}
+
+export { sendGridEmail, sendEmail }

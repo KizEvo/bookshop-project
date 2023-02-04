@@ -1,4 +1,4 @@
-import sendEmail from './sendEmail.js'
+import { sendGridEmail } from './sendEmail.js'
 
 const sendResetPasswordEmail = async ({
   name,
@@ -17,7 +17,7 @@ const sendResetPasswordEmail = async ({
     <p>If you didn't request this action, you can safely ignore it! Have a nice day
   </p>
   `
-  return sendEmail({
+  return sendGridEmail({
     to: email,
     subject: 'Reset Password Confirmation',
     html: `<h4>Hello ${name},</h4>

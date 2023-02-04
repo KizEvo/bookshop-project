@@ -3,6 +3,7 @@ const router = express.Router()
 import {
   authenticationUser,
   authorizePermissions,
+  unauthenticateTestAdmin,
 } from '../middlewares/authentication.js'
 import {
   createOrder,
@@ -15,7 +16,7 @@ import {
 
 router
   .route('/')
-  .post(authenticationUser, createOrder)
+  .post(authenticationUser, unauthenticateTestAdmin, createOrder)
   .get(authenticationUser, authorizePermissions('admin'), getAllOrders)
 
 router
@@ -25,7 +26,17 @@ router
 router
   .route('/:id')
   .get(authenticationUser, authorizePermissions('admin'), getSingleOrder)
-  .patch(authenticationUser, authorizePermissions('admin'), updateOrder)
-  .delete(authenticationUser, authorizePermissions('admin'), deleteOrder)
+  .patch(
+    authenticationUser,
+    authorizePermissions('admin'),
+    unauthenticateTestAdmin,
+    updateOrder
+  )
+  .delete(
+    authenticationUser,
+    authorizePermissions('admin'),
+    unauthenticateTestAdmin,
+    deleteOrder
+  )
 
 export default router

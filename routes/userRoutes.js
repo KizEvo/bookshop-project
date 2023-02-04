@@ -12,6 +12,7 @@ import {
 import {
   authenticationUser,
   authorizePermissions,
+  unauthenticateTestAdmin,
 } from '../middlewares/authentication.js'
 
 router
@@ -19,11 +20,13 @@ router
   .get(authenticationUser, authorizePermissions('admin'), getAllUsers)
 
 router.route('/showMe').get(authenticationUser, showCurrentUser)
-router.route('/updateUser').patch(authenticationUser, updateUser)
+router
+  .route('/updateUser')
+  .patch(authenticationUser, unauthenticateTestAdmin, updateUser)
 
 router
   .route('/updateUserPassword')
-  .patch(authenticationUser, updateUserPassword)
+  .patch(authenticationUser, unauthenticateTestAdmin, updateUserPassword)
 
 router.route('/:id').get(authenticationUser, getSingleUser)
 

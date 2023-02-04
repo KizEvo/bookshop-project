@@ -100,7 +100,7 @@ const SearchFormAllProductsAdmin = () => {
         </div>
         <div className='container mt-2'>
           <label htmlFor='custom-range' className='form-label'>
-            Price Range:
+            Price: <span className='fw-bold'>${values.price}</span>
           </label>
           <div className='d-flex gap-5 align-items-center mx-5 px-5'>
             <h4>0</h4>
@@ -110,11 +110,11 @@ const SearchFormAllProductsAdmin = () => {
               className='form-range'
               defaultValue='0'
               min='0'
-              max='100'
+              max='200'
               id='custom-range'
               onChange={handleChange}
             ></input>
-            <h4>100</h4>
+            <h4>200</h4>
           </div>
         </div>
         <div className='d-flex flex-column m-2 mt-4'>

@@ -36,7 +36,14 @@ Cloudinary.v2.config({
 })
 
 app.use(express.json())
-app.use(helmet())
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      'img-src': ["'self'", 'https: data:'],
+    },
+  })
+)
 app.use(xss())
 app.use(mongoSanitize())
 app.use(cookieParser(process.env.JWT_SECRET))

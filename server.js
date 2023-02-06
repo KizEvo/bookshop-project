@@ -3,7 +3,14 @@ const app = express()
 import dotenv from 'dotenv'
 dotenv.config()
 import 'express-async-errors'
+
 import fileUpload from 'express-fileupload'
+import path, { dirname } from 'path'
+import { fileURLToPath } from 'url'
+
+import helmet from 'helmet'
+import xss from 'xss-clean'
+import mongoSanitize from 'express-mongo-sanitize'
 
 //packages
 import cookieParser from 'cookie-parser'
@@ -28,16 +35,24 @@ Cloudinary.v2.config({
   api_secret: process.env.CLOUD_SECRET,
 })
 
-process.on('warning', (e) => console.warn(e.stack))
-
 app.use(express.json())
+app.use(helmet())
+app.use(xss())
+app.use(mongoSanitize())
 app.use(cookieParser(process.env.JWT_SECRET))
 app.use(fileUpload({ useTempFiles: true }))
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+app.use(express.static(path.resolve(__dirname, './client/build')))
 
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/products', productsRouter)
 app.use('/api/v1/user', userRouter)
 app.use('/api/v1/order', cartRouter)
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/build', 'index.html'))
+})
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)

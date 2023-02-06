@@ -44,7 +44,6 @@ const register = async (req, res) => {
     verificationToken,
   })
 
-  const origin = 'http://localhost:3000'
   await sendVerificationEmail({
     name: user.name,
     email: user.email,
@@ -161,7 +160,6 @@ const forgotPassword = async (req, res) => {
 
     await user.save()
 
-    const origin = 'http://localhost:3000'
     await sendResetPasswordEmail({
       name: user.name,
       email: user.email,

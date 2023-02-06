@@ -7,6 +7,7 @@ import { useAppContext } from '../context/appContext'
 const defaultQueriesState = {
   price: 50,
   category: '',
+  sort: 'newest',
 }
 
 const BigFilterForm = () => {
@@ -24,12 +25,13 @@ const BigFilterForm = () => {
       price: debounceSearch,
       name: search.name,
       category: queriesState.category,
+      sort: queriesState.sort,
     }
 
     const page = 1
     changePage(page)
     getSearchProductInput(query)
-  }, [debounceSearch, queriesState.category])
+  }, [debounceSearch, queriesState.category, queriesState.sort])
 
   const cancelTheFirstRender = () => {
     if (refContainer.current) {
@@ -42,7 +44,7 @@ const BigFilterForm = () => {
 
   return (
     <div className='d-none d-md-block'>
-      <div className='d-flex flex-column justify-content-between product-filter-container p-3'>
+      <div className='d-flex flex-column justify-content-start product-filter-container p-3'>
         <ScrollablePriceRange
           queriesState={queriesState}
           setQueriesState={setQueriesState}
@@ -56,6 +58,19 @@ const BigFilterForm = () => {
           />
         </div>
         <div>
+          <hr />
+          <h5 className='fw-bolder'>Sort</h5>
+          <select
+            className='border rounded-pill px-2'
+            onChange={(e) => {
+              setQueriesState((prevState) => {
+                return { ...prevState, sort: e.target.value }
+              })
+            }}
+          >
+            <option value='newest'>Newest</option>
+            <option value='oldest'>Oldest</option>
+          </select>
           <hr />
           <h5>Welcome!</h5>
         </div>

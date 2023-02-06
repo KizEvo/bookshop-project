@@ -34,14 +34,9 @@ const ProductDisplay = () => {
           return <ProductUser key={product._id} {...product} />
         })}
       </div>
-      <div className='text-center'>
-        {products.length === 0 && isFetchingProduct === false && (
-          <h4>No product available at the moment</h4>
-        )}
-      </div>
       {numberOfPages > 1 && <PaginationBtn />}
-      {numberOfPages === 0 && (
-        <h3 className='text-center'>No books match your search</h3>
+      {products.length === 0 && isFetchingProduct === false && (
+        <h3 className='text-center'>No product available at the moment</h3>
       )}
     </div>
   )

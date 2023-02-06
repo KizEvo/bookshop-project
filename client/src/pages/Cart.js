@@ -19,7 +19,7 @@ const Cart = () => {
           <div className='card mb-5'>
             <div className='card-body p-4'>
               <div>
-                <p className='mb-0 me-5 d-flex justify-content-between align-items-center'>
+                <p className='mb-0 d-flex justify-content-between align-items-center'>
                   <span className='me-2 h4 mb-0'>Order total</span>
                   <span className='h4 mb-0'>${totalPriceOfProductsInCart}</span>
                 </p>
@@ -27,15 +27,11 @@ const Cart = () => {
             </div>
           </div>
 
-          <div className='d-flex justify-content-end mb-3'>
+          <div className='d-flex flex-column flex-md-row justify-content-end mb-3 gap-3'>
             <Link to='../products' className='btn btn-light btn-lg me-2'>
               Continue shopping
             </Link>
-            <button
-              type='button'
-              disabled
-              className='btn btn-primary btn-lg d-flex align-items-center'
-            >
+            <button type='button' disabled className='btn btn-primary btn-lg'>
               Checkout
             </button>
           </div>
@@ -57,7 +53,7 @@ const Cart = () => {
         <CartCardContainer />
 
         {/* total price */}
-        <div className='card mb-5 align-self-end' style={{ width: '25rem' }}>
+        <div className='card mb-5 align-self-end' style={{ maxWidth: '25rem' }}>
           <div className='card-body p-4'>
             <div>
               <p className='mb-0 me-3 d-flex justify-content-between align-items-center'>
@@ -68,14 +64,11 @@ const Cart = () => {
           </div>
         </div>
 
-        <div className='d-flex justify-content-end mb-5'>
+        <div className='d-flex flex-column flex-md-row justify-content-end mb-5 gap-3'>
           <Link to='/products' className='btn btn-light btn-lg me-2'>
             Continue shopping
           </Link>
-          <Link
-            to='checkout'
-            className='btn btn-primary btn-lg d-flex align-items-center'
-          >
+          <Link to='checkout' className='btn btn-primary btn-lg'>
             Checkout
           </Link>
         </div>

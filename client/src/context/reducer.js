@@ -411,6 +411,8 @@ const reducer = (state, action) => {
         (product) => product.id === state.productId
       )
 
+      console.log('im here')
+
       if (productAlreadyExistInCart) {
         return {
           ...state,
@@ -418,7 +420,7 @@ const reducer = (state, action) => {
             return product.id === state.productId
               ? {
                   ...product,
-                  quantity: product.quantity + parseInt(action.payload),
+                  quantity: product.quantity + Number(action.payload),
                 }
               : { ...product }
           }),
@@ -466,7 +468,7 @@ const reducer = (state, action) => {
             return product.id === state.productId
               ? {
                   ...product,
-                  quantity: product.quantity + 1,
+                  quantity: product.quantity++,
                 }
               : { ...product }
           }),

@@ -174,7 +174,7 @@ const AppProvider = ({ children }) => {
     try {
       await axios.delete('/api/v1/auth/logout')
     } catch (error) {
-      console.log(error)
+      console.log(error.response.data.msg)
     }
   }
 
@@ -372,7 +372,7 @@ const AppProvider = ({ children }) => {
       })
     } catch (error) {
       if (!abortController.signal.aborted) {
-        console.log(error.response.data)
+        console.log(error.response.data.msg)
       }
     }
   }

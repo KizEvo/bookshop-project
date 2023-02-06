@@ -87,7 +87,7 @@ const CreateProduct = () => {
             </div>
           </div>
           <div className='d-flex flex-column'>
-            <label className='btn btn-success align-self-center mt-3'>
+            <label className='btn btn-success align-self-sm-center px-2 mt-3'>
               <input
                 type='file'
                 accept='.png,.jpg'

@@ -115,7 +115,7 @@ const CreditCardForm = () => {
           onChange={cardNumberHandler}
         />
       </div>
-      <div className='d-flex gap-3'>
+      <div className='d-flex flex-sm-row flex-column gap-3'>
         <div className='d-flex flex-column gap-1'>
           <label htmlFor='credit-card-expire-date'>Expire date</label>
           <input
@@ -129,9 +129,9 @@ const CreditCardForm = () => {
           />
         </div>
         <div className='d-flex flex-column gap-1'>
-          <label htmlFor='credit-card-expire-date'>CVC</label>
+          <label htmlFor='credit-card-expire-cvc'>CVC</label>
           <input
-            id='credit-card-expire-date'
+            id='credit-card-expire-cvc'
             type='text'
             value={cvcValidate}
             maxLength='5'

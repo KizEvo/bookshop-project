@@ -28,7 +28,7 @@ const AllOrdersContainerAdmin = () => {
   }
 
   return (
-    <div className='container d-flex flex-column justify-content-center gap-4 mt-5'>
+    <div className='container d-flex flex-column justify-content-center gap-5 mt-5'>
       {adminAllOrders.map((order) => {
         return (
           <div key={order._id} className='shadow'>

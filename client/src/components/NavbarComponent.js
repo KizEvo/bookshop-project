@@ -10,7 +10,7 @@ import { useAppContext } from '../context/appContext'
 const NavbarComponent = () => {
   const { user } = useAppContext()
   return (
-    <Navbar bg='primary' expand='lg' variant='dark'>
+    <Navbar bg='primary' expand='lg'>
       <Container>
         <Link to='/'>
           <Logo />
@@ -25,17 +25,19 @@ const NavbarComponent = () => {
         </Navbar.Collapse>
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='ms-auto'>
-            {/* Add Admin Route later */}
+            <NavLinksComponent text={'Cart'} path={'cart'} />
             {user ? (
               user.role === 'admin' ? (
-                <NavLinksComponent text={'Admin'} path={'admin'} />
+                <span>
+                  <NavLinksComponent text={'Admin'} path={'admin'} />
+                  <NavLinksComponent text={'User'} path={'user'} />
+                </span>
               ) : (
                 <NavLinksComponent text={'User'} path={'user'} />
               )
             ) : (
               <NavLinksComponent text={'Login'} path={'register'} />
             )}
-            <NavLinksComponent text={'Cart'} path={'cart'} />
           </Nav>
         </Navbar.Collapse>
       </Container>

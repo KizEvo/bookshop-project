@@ -102,7 +102,7 @@ const SearchFormAllProductsAdmin = () => {
           <label htmlFor='custom-range' className='form-label'>
             Price: <span className='fw-bold'>${values.price}</span>
           </label>
-          <div className='d-flex gap-5 align-items-center mx-5 px-5'>
+          <div className='d-flex gap-2 align-items-center'>
             <h4>0</h4>
             <input
               type='range'
